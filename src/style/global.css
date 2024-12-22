@@ -1,0 +1,36 @@
+/*컬러 변수 추후 추가*/
+
+* {
+  margin: 0;
+  padding: 0;
+
+  /* font-family: 추후 추가가; */
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 100%;
+
+  background-color: black;
+
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-width: 100%;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+}
+
+textarea {
+  outline: none;
+}
