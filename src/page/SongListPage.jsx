@@ -7,8 +7,8 @@ const SongListPage = () => {
 export default SongListPage;
 
 const Container = styled.div`
-  background-color: white;
-  height: 100vh;
+  background-color: var(--beige);
+  min-height: 100vh;
 
   @media (min-width: 500px) {
     width: 31.25rem; //500px

@@ -1,10 +1,25 @@
 /*컬러 변수 추후 추가*/
 
+@font-face {
+  font-family: 'Ownglyph_ParkDaHyun';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2411-3@1.0/Ownglyph_ParkDaHyun.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mungyeong-Gamhong-Apple';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2410-2@1.0/Mungyeong-Gamhong-Apple.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
-
-  /* font-family: 추후 추가가; */
+  font-family: 'Ownglyph_ParkDaHyun';
 }
 
 html,
@@ -12,7 +27,9 @@ body {
   width: 100%;
   min-width: 100%;
 
-  background-color: black;
+  font-size: 1.25rem;
+  color: var(--brown);
+  background-color: white;
 
   overflow-x: hidden;
 }
