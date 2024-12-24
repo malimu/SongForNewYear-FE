@@ -3,6 +3,8 @@ import sparkleRamji from '../assets/SongListPage/songlist.svg';
 import { SongComponent } from '../component/SongListPage/SongComponent';
 import { PagingBar } from '../component/SongListPage/PagingBar';
 import { useEffect, useState } from 'react';
+import { getSongList } from '../api/song';
+import { useNavigate } from 'react-router-dom';
 
 const filterList = [
   '시작',
@@ -26,59 +28,29 @@ const filterMap = {
   용기: 'courage',
 };
 
-const Dummy = [
-  {
-    title: '1조',
-    artist: '이찬혁',
-    category: 'WEALTH',
-    lyrics:
-      'Cuz it will come true true true true\n1조 will come true true true true',
-    cover_path:
-      'https://cdnimg.melon.co.kr/cm2/album/images/113/91/548/11391548_20231229103157_500.jpg?e3ba607f2495c28b2f213d30ef7ea349/melon/resize/282/quality/80/optimize',
-    youtube_path: 'https://youtu.be/KMlfL9Xy-K4?si=cHUNx2-A24VE0Ufj',
-  },
-  {
-    title: '24K Magic',
-    artist: 'Bruno Mars',
-    category: 'WEALTH',
-    lyrics: '24 karat magic in the air',
-    cover_path:
-      'https://cdnimg.melon.co.kr/cm/album/images/100/04/486/10004486_500.jpg/melon/resize/282/quality/80/optimize',
-    youtube_path: 'https://www.youtube.com/watch?v=UqyT8IEBkvY',
-  },
-  {
-    title: '7 rings',
-    artist: 'Ariana Grande',
-    category: 'WEALTH',
-    lyrics: 'I want it, I got it, I want it, I got it',
-    cover_path:
-      'https://cdnimg.melon.co.kr/cm/album/images/102/43/766/10243766_500.jpg?51ffb6b52e1a73bf914e3582dc86259c/melon/resize/282/quality/80/optimize',
-    youtube_path: 'https://youtu.be/QYh6mYIJG2Y?si=JJNsCCutzjk0-WqL',
-  },
-  {
-    title: '가보자',
-    artist: 'Xydo',
-    category: 'BEGINNING',
-    lyrics:
-      '반짝이는 꿈들로 가득 찬 저 세상이\n날 부르고 있잖아 조금 더 가보자',
-    cover_path:
-      'https://cdnimg.melon.co.kr/cm2/album/images/108/94/351/10894351_20220318163202_500.jpg?2ccfaa9d732e500e97a7e3d663ec4343/melon/resize/282/quality/80/optimize',
-    youtube_path: 'https://youtu.be/aY382UdxfnQ?si=Qloiz7safmuQDkWX',
-  },
-  {
-    title: '개화',
-    artist: '루시',
-    category: 'COURAGE',
-    lyrics: '괜찮아 언젠가 파랗게 피어날 거야',
-    cover_path:
-      'https://cdnimg.melon.co.kr/cm2/album/images/104/28/038/10428038_20200508161504_500.jpg?649155371b3049eb7a23f8b03e054387/melon/resize/282/quality/80/optimize',
-    youtube_path: 'https://www.youtube.com/watch?v=2-P-NIiLiQc',
-  },
-];
-
 const SongListPage = () => {
   const [isSticky, setIsSticky] = useState(true);
   const [filter, setFilter] = useState(null);
+  const [songData, setSongData] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    const getSongData = async () => {
+      try {
+        const res = await getSongList(filterMap[filter], currentPage, 5);
+        setSongData(res);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth', // 부드럽게 스크롤
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getSongData();
+  }, [filter, currentPage]);
 
   useEffect(() => {
     const checkHeight = () => {
@@ -89,7 +61,7 @@ const SongListPage = () => {
     };
 
     checkHeight();
-  }, []);
+  }, [songData, filter]);
 
   const onClickFilter = (cat) => {
     if (filter === cat) {
@@ -101,7 +73,7 @@ const SongListPage = () => {
 
   return (
     <Container>
-      <Header>새해첫곡</Header>
+      <Header onClick={() => nav('/')}>새해첫곡</Header>
       <TitleContainer>
         <Sparkle src={sparkleRamji} />
         <Title>노래 목록 보기</Title>
@@ -119,12 +91,15 @@ const SongListPage = () => {
         ))}
       </FilterContainer>
       <SongListContainer>
-        {Dummy.map((item) => (
-          <SongComponent info={item} />
-        ))}
+        {songData.data &&
+          songData.data.map((item) => <SongComponent info={item} />)}
       </SongListContainer>
       <BottomContainer $isSticky={isSticky}>
-        <PagingBar totalItems={35} />
+        <PagingBar
+          totalItems={songData.total_items || 126}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
         <Footer>
           @ 2024 Team Malimu
           <br />
