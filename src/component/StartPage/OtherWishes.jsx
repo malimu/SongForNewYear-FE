@@ -3,41 +3,41 @@ import reloadIcon from '../../assets/StartPage/refresh.svg';
 import { Button } from '../Button';
 import { WishComponent } from './WishComponent';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getRandomWish } from '../../api/wish';
 
 export const OtherWishes = () => {
   const nav = useNavigate();
+  const [wishList, setWishList] = useState([]);
+
+  useEffect(() => {
+    getWishList();
+  }, []);
+
+  const getWishList = async () => {
+    try {
+      const res = await getRandomWish();
+      setWishList(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <Container>
       <TitleContainer>
         <Title>다른 사람들이 빈 소원</Title>
-        <ReloadIcon src={reloadIcon} />
+        <ReloadIcon src={reloadIcon} onClick={getWishList} />
       </TitleContainer>
       <WishContainer>
-        <WishComponent
-          wish="이재현이랑 결혼하게 해주세요"
-          name="랑이"
-          cat={'love'}
-          idx={1}
-        />
-        <WishComponent
-          wish="이재현이랑 결혼하게 해주세요"
-          name="랑이"
-          cat={'beginning'}
-          idx={2}
-        />
-        <WishComponent
-          wish="이재현이랑 결혼하게 해주세요"
-          name="랑이"
-          cat={'courage'}
-          idx={3}
-        />
-        <WishComponent
-          wish="이재현이랑 결혼하게 해주세요"
-          name="랑이"
-          cat={'love'}
-          idx={4}
-        />
+        {wishList.map((item, idx) => (
+          <WishComponent
+            wish={item.content}
+            name={item.nickname}
+            cat={'love'}
+            idx={idx + 1}
+          />
+        ))}
       </WishContainer>
       <ButtonWrapper>
         <Button
