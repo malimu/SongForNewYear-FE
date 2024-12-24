@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import reloadIcon from '../../assets/StartPage/refresh.svg';
 import { Button } from '../Button';
 import { WishComponent } from './WishComponent';
+import { useNavigate } from 'react-router-dom';
 
 export const OtherWishes = () => {
+  const nav = useNavigate();
+
   return (
     <Container>
       <TitleContainer>
@@ -37,7 +40,11 @@ export const OtherWishes = () => {
         />
       </WishContainer>
       <ButtonWrapper>
-        <Button text="노래 전체 목록 보기" color="brown" />
+        <Button
+          text="노래 전체 목록 보기"
+          color="brown"
+          onClick={() => nav('/songlist')}
+        />
       </ButtonWrapper>
     </Container>
   );

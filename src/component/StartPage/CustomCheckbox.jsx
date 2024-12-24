@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import toggleOn from '../../assets/StartPage/toggleon.svg';
 import toggleOff from '../../assets/StartPage/toggleoff.svg';
 
-export const CustomCheckbox = ({ isChecked, onChange }) => {
+export const CustomCheckbox = ({ isChecked, setIsChecked }) => {
   return (
     <Container>
       <HiddenCheckbox
         type="checkbox"
         id="checkbox"
         checked={isChecked}
-        onChange={onChange}
+        onChange={() => setIsChecked((prev) => !prev)}
       />
       <StyledCheckbox htmlFor={'checkbox'} checked={isChecked} />
     </Container>

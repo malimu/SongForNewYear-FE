@@ -1,8 +1,12 @@
 import styled from 'styled-components';
+import useScrollFadeIn from '../../hooks/useScrollFadeIn';
 
 export const WishComponent = ({ wish, name, cat, idx }) => {
+  //const aniDelay = idx < 4 ? idx / 2 : 0;
+  const animation = useScrollFadeIn();
+
   return (
-    <Container $idx={idx} $cat={cat}>
+    <Container $idx={idx} $cat={cat} {...animation}>
       <Wish>{wish}</Wish>
       <Name>{name}</Name>
     </Container>
@@ -28,7 +32,7 @@ const Container = styled.div`
   background-color: ${({ $cat }) => `var(--${$cat}80)`};
 
   position: relative;
-  z-index: ${({ $idx }) => 4 - $idx};
+  z-index: ${({ $idx }) => $idx};
 `;
 
 const Wish = styled.div`

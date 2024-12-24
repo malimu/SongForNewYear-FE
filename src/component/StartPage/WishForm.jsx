@@ -22,7 +22,8 @@ export const WishForm = () => {
       </WishContainer>
       <CheckboxContainer>
         <CheckboxText>소원을 다른 사람들에게 보여줄까요?</CheckboxText>
-        <CustomCheckbox isChecked={isChecked} />
+
+        <CustomCheckbox isChecked={isChecked} setIsChecked={setIsChecked} />
       </CheckboxContainer>
       <ButtonWrapper>
         <Button text="소원 빌기" color="yellow" />
