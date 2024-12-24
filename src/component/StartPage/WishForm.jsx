@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { postWish } from '../../api/wish';
 import { useNavigate } from 'react-router-dom';
 
-export const WishForm = () => {
+export const WishForm = ({ setIsSubmitted }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [wish, setWish] = useState({ nickname: null, content: null });
   const [isActive, setIsActive] = useState(false);
@@ -37,6 +37,7 @@ export const WishForm = () => {
 
   const submitWish = async () => {
     try {
+      setIsSubmitted(true);
       const data = {
         nickname: wish.nickname,
         content: wish.content,
@@ -44,7 +45,9 @@ export const WishForm = () => {
       };
       const res = await postWish(data);
       if (res) {
-        nav('/result', { state: { res } });
+        setTimeout(() => {
+          nav('/result', { state: { res } });
+        }, 1000);
       }
     } catch (error) {
       console.error(error);
