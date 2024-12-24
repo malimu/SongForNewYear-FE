@@ -61,7 +61,7 @@ const Lyrics = styled.div`
 `;
 
 const SongContainer = styled.div`
-  width: 90%;
+  width: 100%;
   height: 5rem;
 
   display: flex;
