@@ -3,11 +3,19 @@
   --browngray: #aca298;
   --beige: #fffdf1;
   --beginning: #afbccf;
+  --beginning80: #afbccfcc;
   --success: #c1d9de;
+  --success80: #c1d9decc;
   --health: #a9ddd0;
+  --health80: #a9ddd0cc;
   --luck: #dae9b3;
+  --luck80: #dae9b3cc;
   --wealth: #fcecae;
+  --wealth80: #fcecaecc;
   --happiness: #ffdfbb;
+  --happiness80: #ffdfbbcc;
   --love: #ffe4e4;
+  --love80: #ffe4e4cc;
   --courage: #ddd4e5;
+  --courage80: #ddd4e5cc;
 }
