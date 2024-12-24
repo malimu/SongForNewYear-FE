@@ -10,15 +10,14 @@ const Container = styled.button`
   align-items: center;
   justify-content: center;
 
-  width: calc(100% - 6.5rem);
+  width: 100%;
   font-size: 1.875rem;
   padding: 0.31rem 0;
-  margin: 0 3.25rem;
   box-sizing: border-box;
 
   background-color: ${({ $color }) =>
     $color == 'brown' ? '#8B7966' : '#ffe4a4'};
-  color: ${({ $color }) => $color == 'brown' && 'white'};
+  color: ${({ $color }) => ($color == 'brown' ? 'white' : '#6b5743')};
   border-radius: 3.125rem;
   border: 1.5px solid #6b5743;
 `;
