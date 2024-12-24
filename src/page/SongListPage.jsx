@@ -72,7 +72,7 @@ const SongListPage = () => {
         <SongComponent />
       </SongListContainer>
       <BottomContainer $isSticky={isSticky}>
-        <PagingBar />
+        <PagingBar totalItems={35} />
         <Footer>
           @ 2024 Team Malimu
           <br />

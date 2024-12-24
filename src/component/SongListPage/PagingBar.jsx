@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { atom } from 'recoil';
 
-export const PagingBar = () => {
-  const TOTAL_PAGES = 10;
-  const CAT_PAGES = 3;
+export const PagingBar = ({ totalItems }) => {
+  const ITEMS_PER_PAGE = 5;
+  const TOTAL_PAGES = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const PAGES_PER_GROUP = 3;
 
   const [currentGroup, setCurrentGroup] = useState(1);
@@ -38,7 +39,9 @@ export const PagingBar = () => {
 
   return (
     <Container>
-      <Arrow onClick={onClickPrev}>{'<'}</Arrow>
+      <Arrow $isActive={currentPage > 3} onClick={onClickPrev}>
+        {'<'}
+      </Arrow>
       {Array.from(
         { length: endPage - startPage + 1 },
         (_, i) => startPage + i
@@ -51,7 +54,12 @@ export const PagingBar = () => {
           {page}
         </Page>
       ))}
-      <Arrow onClick={onClickNext}>{'>'}</Arrow>
+      <Arrow
+        $isActive={currentGroup * PAGES_PER_GROUP < TOTAL_PAGES}
+        onClick={onClickNext}
+      >
+        {'>'}
+      </Arrow>
     </Container>
   );
 };
@@ -68,7 +76,9 @@ export const Container = styled.div`
   color: var(--browngray);
 `;
 
-export const Arrow = styled.div``;
+export const Arrow = styled.div`
+  visibility: ${({ $isActive }) => !$isActive && 'hidden'};
+`;
 
 export const Page = styled.div`
   color: ${({ $isActive }) => $isActive && 'var(--brown)'};
