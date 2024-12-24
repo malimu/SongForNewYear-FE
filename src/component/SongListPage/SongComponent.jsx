@@ -1,14 +1,16 @@
 import styled from 'styled-components';
+import musicComp from '../../assets/SongListPage/musicComp.svg';
 
-export const SongComponent = () => {
+export const SongComponent = ({ info }) => {
   return (
-    <Container>
-      <Lyrics>" {'아무쪼록 행운을 빌어 줘\n내 앞길에 행복을 빌어 줘'} "</Lyrics>
+    <Container $cat={info.category.toLowerCase()}>
+      <Sparkle src={musicComp} />
+      <Lyrics>“ {info.lyrics} ”</Lyrics>
       <SongContainer>
         <CoverImg />
         <InfoContainer>
-          <Title>행운을 빌어줘 </Title>
-          <Singer>원필</Singer>
+          <Title>{info.title}</Title>
+          <Singer>{info.artist}</Singer>
           <ProgressBarContainer>
             <Time>1:40</Time>
             <Bar>
@@ -32,18 +34,30 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.63rem;
+  justify-content: space-around;
+
+  padding: 0.75rem;
+  box-sizing: border-box;
 
   border-radius: 1.25rem;
   border: 1.5px solid var(--brown);
 
-  background-color: #ccf6ff;
+  background-color: ${({ $cat }) => `var(--${$cat})`};
+  position: relative;
+`;
+
+const Sparkle = styled.img`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 1.8rem;
+  right: -0.8rem;
 `;
 
 const Lyrics = styled.div`
   font-size: 1.25rem;
+  width: 85%;
   white-space: pre-wrap;
+  text-align: center;
 `;
 
 const SongContainer = styled.div`
