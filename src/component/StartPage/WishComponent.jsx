@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import useScrollFadeIn from '../../hooks/useScrollFadeIn';
+import pinkstar from '../../assets/StartPage/pinkstar.svg';
+import yellowstar from '../../assets/StartPage/yellostar.svg';
 
 export const WishComponent = ({ wish, name, cat, idx }) => {
   //const aniDelay = idx < 4 ? idx / 2 : 0;
@@ -7,8 +9,10 @@ export const WishComponent = ({ wish, name, cat, idx }) => {
 
   return (
     <Container $idx={idx} $cat={cat} {...animation}>
+      {idx === 2 && <YellowStar src={yellowstar} />}
       <Wish>{wish}</Wish>
       <Name>{name}</Name>
+      {idx === 3 && <PinkStar src={pinkstar} />}
     </Container>
   );
 };
@@ -44,4 +48,18 @@ const Name = styled.div`
   margin-left: auto;
   color: var(--browngray);
   font-size: 1.25rem;
+`;
+
+const YellowStar = styled.img`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: -2rem;
+`;
+
+const PinkStar = styled.img`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  right: -4rem;
 `;

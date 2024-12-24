@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import sparkleYellow from '../assets/StartPage/sparkle1 2.svg';
+import sparkleYellow from '../assets/StartPage/titleSparkle.svg';
 import DJRamji from '../assets/StartPage/DJRamji.svg';
 import bottomRamji from '../assets/StartPage/bottomRamji.svg';
 import { WishForm } from '../component/StartPage/WishForm';
@@ -48,6 +48,7 @@ const Container = styled.div`
   align-items: center;
 
   overflow-y: scroll;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -91,14 +92,14 @@ const Title = styled.div`
 
 const SparkleYellow = styled.img`
   position: absolute;
-  top: -3rem;
-  left: -3rem;
+  top: -1.5rem;
+  left: -2.5rem;
 `;
 
 const Daramgi = styled.img`
   position: absolute;
-  top: -3.5rem;
-  right: -4rem;
+  top: -4.5rem;
+  right: -4.4rem;
 `;
 
 const Footer = styled.div`
@@ -114,7 +115,7 @@ const BottomRamji = styled.img`
   position: absolute;
   transform: translate(-50%, -50%);
 
-  left: 50%;
+  left: 55%;
   bottom: -60%;
 `;
 
