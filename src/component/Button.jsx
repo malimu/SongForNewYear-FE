@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Button = ({ text, color }) => {
+export const Button = ({ text, color, onClick }) => {
   // color는 'yellow', 'brown' 둘 중 하나
-  return <Container $color={color}>{text}</Container>;
+  return <Container $color={color} onClick={onClick}>{text}</Container>;
 };
 
 const Container = styled.button`
