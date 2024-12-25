@@ -222,10 +222,10 @@ const WishContainer = styled.div`
 const Wish = styled.div`
   text-align: center;
   font-size: ${({ textLength }) => {
-    if (textLength <= 20) return "3rem";
-    if (textLength <= 40) return "2.5rem";
-    if (textLength <= 50) return "2rem";
-    return "1.5rem";
+    if (textLength <= 20) return "clamp(2rem, 2rem + 2vw, 3rem)";
+    if (textLength <= 40) return "clamp(1.5rem, 1.5rem + 2vw, 2.5rem)";
+    if (textLength <= 50) return "clamp(1.3rem, 1.3rem + 1vw, 1.5rem)";
+    return "clamp(1.3rem, 1.3rem + 1vw, 1.5rem)";
   }};
   max-height: 7rem;
   overflow: hidden;
