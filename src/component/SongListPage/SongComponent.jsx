@@ -69,7 +69,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
 
   padding: 0.75rem;
   box-sizing: border-box;
@@ -89,8 +88,13 @@ const Sparkle = styled.img`
 `;
 
 const Lyrics = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   font-size: 1.25rem;
   width: 85%;
+  height: calc(100% - 5rem - 0.63rem);
   white-space: pre-wrap;
   text-align: center;
 `;
@@ -103,6 +107,7 @@ const SongContainer = styled.div`
   align-items: center;
   gap: 0.6rem;
 
+  margin-top: auto;
   padding: 0.6rem;
   box-sizing: border-box;
 
