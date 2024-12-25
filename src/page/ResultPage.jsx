@@ -67,7 +67,10 @@ const ResultPage = () => {
   const handleCapture = async () => {
     if (!captureRef.current) return;
 
-    const canvas = await html2canvas(captureRef.current);
+    const canvas = await html2canvas(captureRef.current, {
+      useCORS: true, // CORS 이미지 허용
+      logging: true,
+    });
     const link = document.createElement('a');
     link.download = 'songfornewyear_result.png';
     link.href = canvas.toDataURL();
@@ -100,7 +103,14 @@ const ResultPage = () => {
           12월 31일 <TimeColor style={{ color: timeTextColor }}>{formattedTime}</TimeColor>에 재생 시 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
       </CardContainer>
-      <BelowContents onCapture={handleCapture} videoCode={videoCode}/>
+      <BelowContents 
+        onCapture={handleCapture} 
+        videoCode={videoCode}
+        nickname={res.nickname}
+        songTitle={res.recommended_song.title}
+        artist={res.recommended_song.artist}
+        lyrics={res.recommended_song.lyrics}
+      />
       <Footer>
         <FooterText>
           @ 2024 Team Malimu
@@ -223,7 +233,9 @@ const SongContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const AlbumCover = styled.img`
+const AlbumCover = styled.img.attrs(() => ({
+  crossOrigin: "anonymous",
+}))`
   width: clamp(10rem, 40vw, 11rem);
   aspect-ratio: 1 / 1;
   border-radius: 0.625rem;

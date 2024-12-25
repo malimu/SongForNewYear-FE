@@ -9,10 +9,26 @@ import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
 import { useNavigate } from 'react-router-dom';
 
-export const BelowContents = ({ onCapture, videoCode }) => {
+export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyrics, artist }) => {
     const nav = useNavigate();
     const shareUrl = window.location.href; // 배포 주소로 바꾸기
-    const twitterText = `[OO님을 위한 새해첫곡]%0A🎵행운을 빌어줘 - 원필%0A" 내 앞길에 행운을 빌어줘 "%0A원하는 대로 다 이룰 수 있는 새해가 될 거예요🌅%0A새해 첫곡 고르러 가기▶️`;
+
+    const messagesArray = [
+        "원하는 대로 다 이룰 수 있는 새해가 될 거예요🌄",
+        "마음껏 사랑하는 한 해이길 바라요💕",
+        "가고 싶은 대로 길이 만들어질 거예요🏃💨",
+        "행운🍀도 행복☘️도 가득한 새해가 되길",
+        "꿈꿔온 모든 것이 펼쳐지는 한 해일 거예요🌟",
+        "소중한 사람들과 소중한 추억을 만들어요🎆",
+        "한 걸음씩 나아가는 용기 있는 한 해가 될 거예요💪",
+        "새로운 시작, 새로운 기회가 함께하는 한 해 되세요✈️",
+        "웃음 가득한 새해가 될 거예요😄",
+        "반짝반짝 빛나는 한 해가 될 거예요✨",
+    ];
+
+    const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
+
+    const twitterText = `[${nickname} 님을 위한 새해첫곡]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
 
     const shareOnTwitter = () => {
         const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareUrl)}`;
