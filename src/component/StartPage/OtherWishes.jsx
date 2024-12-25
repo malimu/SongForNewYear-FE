@@ -34,6 +34,7 @@ export const OtherWishes = () => {
       <WishContainer>
         {wishList.map((item, idx) => (
           <WishComponent
+            key={`${item.content}-${idx}`}
             wish={item.content}
             name={item.nickname}
             cat={'love'}

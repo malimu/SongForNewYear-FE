@@ -96,7 +96,7 @@ const SongListPage = () => {
       </SongListContainer>
       <BottomContainer $isSticky={isSticky}>
         <PagingBar
-          totalItems={songData.total_items || 126}
+          totalItems={songData.total_items || 1}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

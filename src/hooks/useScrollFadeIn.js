@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useScrollFadeIn = ({
   threshold = 0.0,
@@ -17,7 +17,7 @@ const useScrollFadeIn = ({
         element.transitionProperty = 'opacity, transform';
         element.transitionDuration = '1.5s';
         element.transitionTimingFunction = 'cubic-bezier(0, 0, 1, 1)';
-        element.transitionDelay = delay;
+        element.transitionDelay = delay + 's';
         element.opacity = 1;
         element.transform = `${translate} translate3d(0, 0, 0)`;
       }
