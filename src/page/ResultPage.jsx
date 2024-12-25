@@ -116,7 +116,7 @@ const ResultPage = () => {
           </LyricsContainer>
         </ResultCardContainer>
         <SongTime>
-          12월 31일 <TimeColor style={{ color: timeTextColor }}>{formattedTime}</TimeColor>에 재생 시 <br />이 가사로 한 해를 시작할 수 있어요!
+          12월 31일 <TimeColor style={{ color: timeTextColor }}>{formattedTime}</TimeColor>에 재생하면 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
       </CardContainer>
       <BelowContents 
@@ -269,7 +269,7 @@ const SongTextContainer = styled.div`
   justify-content: center;
 
   padding-left: 1rem;
-  text-align: start;
+  text-align: center;
 `;
 
 const SongTitle = styled.div`
@@ -303,9 +303,11 @@ const SongArtist = styled.div`
 
 const LyricsContainer = styled.div`
   position: absolute;
-  top: 80%;
+  top: 88.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
-  height: clamp(6rem, 6rem + 5vw, 9rem);
+  height: clamp(6rem, 7rem + 3vw, 9rem);
   padding: 0.5rem 4rem;
   box-sizing: border-box;
   display: flex;
