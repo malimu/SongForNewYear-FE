@@ -199,7 +199,7 @@ const WishContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 3.2rem;
+  padding: 1rem 4rem;
   box-sizing: border-box;
 `;
 
@@ -291,7 +291,7 @@ const LyricsContainer = styled.div`
   top: 80%;
   width: 100%;
   height: clamp(6rem, 6rem + 5vw, 9rem);
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 4rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
