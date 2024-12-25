@@ -7,6 +7,18 @@ import { BelowContents } from '../component/ResultPage/BelowContents';
 const ResultPage = () => {
   const captureRef = useRef(null);
 
+  const wishText = "로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨!";
+  const wishLength = wishText.length;
+
+  const songTitleText = "Do You Hear The People Sing?";
+  const songTitleLength = songTitleText.length;
+
+  const artistText = "Aaron Tveit, Eddie Redmayne, Students, Les Misérables Cast";
+  const artistLength = artistText.length;
+
+  const LyricsText = "반짝이는 꿈들로 가득 찬 저 세상이 날 부르고 있잖아 조금 더 가보자";
+  const LyricsLength = LyricsText.length;
+
   const handleCapture = async () => {
     if (!captureRef.current) return;
 
@@ -26,22 +38,21 @@ const ResultPage = () => {
             <Title>뷁뷁뷁뷁뷁 님의 소원</Title>
           </TitleContainer>
           <WishContainer>
-            <Wish>로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨</Wish>
+            <Wish textLength={wishLength}>{wishText}</Wish>
           </WishContainer>
           <SongContainer>
             <AlbumCover />
             <SongTextContainer>
-              <SongTitle>Do You Hear The People Sing?</SongTitle>
-              <SongArtist>이찬혁</SongArtist>
+              <SongTitle textLength={songTitleLength}>{songTitleText}</SongTitle>
+              <SongArtist textLength={artistLength}>{artistText}</SongArtist>
             </SongTextContainer>
           </SongContainer>
           <LyricsContainer>
-            <Lyrics>반짝이는 꿈들로 가득 찬 저 세상이
-            날  부르고 있잖아 조금 더 가보자</Lyrics>
+            <Lyrics textLength={LyricsLength}>{LyricsText}</Lyrics>
           </LyricsContainer>
         </ResultCardContainer>
         <SongTime>
-          12월 31일 <TimeColor>23시 59분 05초</TimeColor>에 재생 시 이 가사로 한 해를 시작할 수 있어요!
+          12월 31일 <TimeColor>23시 59분 05초</TimeColor>에 재생 시 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
       </CardContainer>
       <BelowContents onCapture={handleCapture} />
@@ -72,6 +83,7 @@ const Container = styled.div`
   align-items: center;
 
   overflow-y: scroll;
+  color: var(--darkbrown);
 
   &::-webkit-scrollbar {
     display: none;
@@ -116,7 +128,7 @@ const TitleContainer = styled.div`
 
 const Title = styled.div`
   text-align: center;
-  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-size: clamp(2rem, calc(1.5rem + 3vw), 2.7rem);
 `;
 
 const WishContainer = styled.div`
@@ -124,20 +136,30 @@ const WishContainer = styled.div`
   top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70%;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  padding: 2.5rem 0;
+  padding: 1rem 3.2rem;
   box-sizing: border-box;
 `;
 
 const Wish = styled.div`
   text-align: center;
-  font-size: clamp(1.5rem, 1.5rem + 2vw, 4rem);
+  font-size: ${({ textLength }) => {
+    if (textLength <= 20) return "3rem";
+    if (textLength <= 40) return "2.5rem";
+    if (textLength <= 50) return "2rem";
+    return "1.5rem";
+  }};
+  max-height: 7rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
 `;
 
 const SongContainer = styled.div`
@@ -150,42 +172,65 @@ const SongContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
 
-  padding: 2.5rem 0;
+  padding: 0rem 2.5rem;
   box-sizing: border-box;
 `;
 
 const AlbumCover = styled.img`
-  width: clamp(5rem, 5rem + 5vw, 10rem);
-  height: clamp(5rem, 5rem + 5vw, 10rem);
+  width: clamp(10rem, 40vw, 13rem);
+  aspect-ratio: 1 / 1;
   border-radius: 0.625rem;
   background: url(<path-to-image>) #FFE4A4 50% / cover no-repeat;
 `;
 
 const SongTextContainer = styled.div`
+  width: clamp(10rem, 50vw, 18rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 20rem;
-  margin-left: 1rem;
+  padding-left: 1rem;
+  text-align: start;
 `;
 
 const SongTitle = styled.div`
-  font-size: clamp(1rem, 1rem + 3vw, 4rem);
+  font-size: ${({ textLength }) => {
+    if (textLength <= 5) return "clamp(2rem, 1.8rem + 2vw, 3rem)";
+    if (textLength <= 10) return "clamp(1.8rem, 1.6rem + 1.5vw, 2.5rem)";
+    if (textLength <= 15) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
+    return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
+  }};
+  max-width: 100%;
   margin-bottom: 0.69rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 `;
 
 const SongArtist = styled.div`
-  font-size: clamp(1rem, 1rem + 3vw, 4rem);
+  font-size: ${({ textLength }) => {
+    if (textLength <= 5) return "clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)";
+    if (textLength <= 10) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
+    if (textLength <= 15) return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
+    return "clamp(1.2rem, 1rem + 0.8vw, 1.5rem)";
+  }};
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 const LyricsContainer = styled.div`
   position: absolute;
-  top: 82%;
+  top: 80%;
   width: 100%;
-  padding: 0rem 4rem;
+  height: clamp(6rem, 6rem + 5vw, 9rem);
+  padding: 0.5rem 2.5rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -193,15 +238,29 @@ const LyricsContainer = styled.div`
 
 const Lyrics = styled.div`
   text-align: center;
-  font-size: clamp(1rem, 1rem + 3vw, 4rem);
+  vertical-align: middle;
+  font-size: ${({ textLength }) => {
+    if (textLength <= 20) return "clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)";
+    if (textLength <= 40) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
+    if (textLength <= 50) return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
+    return "clamp(1.2rem, 1rem + 0.8vw, 1.5rem)";
+  }};
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-break: keep-all;
 `;
 
 const SongTime = styled.div`
   text-align: center;
   width: 100%;
-  padding: 0rem 5rem;
+  padding: 0rem 4rem;
   box-sizing: border-box;
-  font-size: clamp(0.7em, 0.7rem + 3vw, 4rem);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: clamp(1rem, calc(1rem + 1vw), 1.5rem);
 `;
 
 const TimeColor = styled.div`
