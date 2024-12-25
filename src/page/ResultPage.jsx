@@ -61,7 +61,23 @@ const ResultPage = () => {
   const formattedTime = `${hh}시 ${mm}분 ${ss}초`;
 
   const url = res.recommended_song.youtube_path;
-  const videoCode = url.split("v=")[1];
+  const extractVideoCode = (url) => {
+    try {
+      const urlObj = new URL(url);
+
+      // 짧은 URL 처리
+      if (urlObj.hostname === "youtu.be") {
+          return urlObj.pathname.slice(1);
+      }
+
+      // 일반 YouTube URL 처리
+      const params = new URLSearchParams(urlObj.search);
+      return params.get("v") || null;
+    } catch {
+        return null;
+    }
+  };
+  const videoCode = extractVideoCode(url);
 
 
   const handleCapture = async () => {
