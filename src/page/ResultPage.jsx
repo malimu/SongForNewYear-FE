@@ -1,36 +1,50 @@
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
 import styled from 'styled-components';
 import Beginning from '../assets/ResultPage/result_beginning.svg';
-import { ImageDownloadButton } from '../component/ResultPage/ImageDownloadButton';
 import { BelowContents } from '../component/ResultPage/BelowContents';
-import { Link } from 'react-router-dom';
 
 const ResultPage = () => {
+  const captureRef = useRef(null);
+
+  const handleCapture = async () => {
+    if (!captureRef.current) return;
+
+    const canvas = await html2canvas(captureRef.current);
+    const link = document.createElement('a');
+    link.download = 'songfornewyear_result.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  };
+
   return (
     <Container>
-      <ResultCardContainer>
-        <ResultCard src={Beginning} />
-        <TitleContainer>
-          <Title>뷁뷁뷁뷁뷁 님의 소원</Title>
-        </TitleContainer>
-        <WishContainer>
-          <Wish>로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨</Wish>
-        </WishContainer>
-        <SongContainer>
-          <AlbumCover />
-          <SongTextContainer>
-            <SongTitle>Do You Hear The People Sing?</SongTitle>
-            <SongArtist>이찬혁</SongArtist>
-          </SongTextContainer>
-        </SongContainer>
-        <LyricsContainer>
-          <Lyrics>반짝이는 꿈들로 가득 찬 저 세상이
-          날  부르고 있잖아 조금 더 가보자</Lyrics>
-        </LyricsContainer>
-      </ResultCardContainer>
-      <SongTime>
-        12월 31일 <TimeColor>23시 59분 05초</TimeColor>에 재생 시 이 가사로 한 해를 시작할 수 있어요!
-      </SongTime>
-      <BelowContents />
+      <CardContainer ref={captureRef}>
+        <ResultCardContainer>
+          <ResultCard src={Beginning} />
+          <TitleContainer>
+            <Title>뷁뷁뷁뷁뷁 님의 소원</Title>
+          </TitleContainer>
+          <WishContainer>
+            <Wish>로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨 로또 1등 당첨</Wish>
+          </WishContainer>
+          <SongContainer>
+            <AlbumCover />
+            <SongTextContainer>
+              <SongTitle>Do You Hear The People Sing?</SongTitle>
+              <SongArtist>이찬혁</SongArtist>
+            </SongTextContainer>
+          </SongContainer>
+          <LyricsContainer>
+            <Lyrics>반짝이는 꿈들로 가득 찬 저 세상이
+            날  부르고 있잖아 조금 더 가보자</Lyrics>
+          </LyricsContainer>
+        </ResultCardContainer>
+        <SongTime>
+          12월 31일 <TimeColor>23시 59분 05초</TimeColor>에 재생 시 이 가사로 한 해를 시작할 수 있어요!
+        </SongTime>
+      </CardContainer>
+      <BelowContents onCapture={handleCapture} />
       <Footer>
         <FooterText>
           @ 2024 Team Malimu
@@ -62,6 +76,11 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const CardContainer = styled.div`
+background: #fffdf1;
+  padding-bottom: 2.56rem;
 `;
 
 const ResultCardContainer = styled.div`

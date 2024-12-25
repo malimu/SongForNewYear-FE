@@ -7,10 +7,10 @@ import kakao from '../../assets/ResultPage/kakao_icon.svg';
 import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
 
-export const BelowContents = () => {
+export const BelowContents = ({ onCapture }) => {
     return (
         <BelowContainer>
-            <ImageDownloadButton />
+            <ImageDownloadButton onClick={onCapture} />
             <ShareContainer>
                 <TitleText>공유하기</TitleText>
                 <ShareIcons>
@@ -52,7 +52,6 @@ const BelowContainer = styled.div`
         margin: 0 auto;
     }
     width: 100%;
-    margin-top: 2.56rem;
     padding-left: 3.25rem;
     padding-right: 3.25rem;
     box-sizing: border-box;
