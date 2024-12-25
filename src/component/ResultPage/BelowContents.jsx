@@ -11,7 +11,13 @@ import { useNavigate } from 'react-router-dom';
 
 export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyrics, artist, wishCount }) => {
     const nav = useNavigate();
-    const shareUrl = window.location.href; // 배포 주소로 바꾸기
+    const shareUrl = 'https://songfornewyear.vercel.app/';
+
+    useEffect(() => {
+        if (window.Kakao && !window.Kakao.isInitialized()) {
+            window.Kakao.init(process.env.REACT_APP_KAKAO_KEY);
+        }
+    }, []);
 
     const messagesArray = [
         "원하는 대로 다 이룰 수 있는 새해가 될 거예요🌄",
@@ -36,6 +42,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
     };
 
     const shareOnKakao = () => {
+
         if (window.Kakao && window.Kakao.isInitialized()) {
             window.Kakao.Link.sendDefault({
                 objectType: 'feed',
