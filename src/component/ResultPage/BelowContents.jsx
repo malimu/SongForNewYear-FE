@@ -9,7 +9,7 @@ import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
 import { useNavigate } from 'react-router-dom';
 
-export const BelowContents = ({ onCapture }) => {
+export const BelowContents = ({ onCapture, videoCode }) => {
     const nav = useNavigate();
     const shareUrl = window.location.href; // 배포 주소로 바꾸기
     const twitterText = `[OO님을 위한 새해첫곡]%0A🎵행운을 빌어줘 - 원필%0A" 내 앞길에 행운을 빌어줘 "%0A원하는 대로 다 이룰 수 있는 새해가 될 거예요🌅%0A새해 첫곡 고르러 가기▶️`;
@@ -79,7 +79,7 @@ export const BelowContents = ({ onCapture }) => {
             <YouTubeContainer>
                 <Spark src={spark} />
                 <YouTube 
-                    videoId='YLxEK0ZKx9A'
+                    videoId={videoCode}
                     opts={{
                         playerVars: {
                             autoplay: 1,

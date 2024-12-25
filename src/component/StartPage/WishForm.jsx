@@ -49,6 +49,7 @@ export const WishForm = ({ setIsSubmitted }) => {
           nav('/result', { state: { res } });
         }, 1000);
       }
+      console.log(res);
     } catch (error) {
       console.error(error);
     }
