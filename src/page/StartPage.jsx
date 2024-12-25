@@ -4,8 +4,24 @@ import DJRamji from '../assets/StartPage/DJRamji.svg';
 import bottomRamji from '../assets/StartPage/bottomRamji.svg';
 import { WishForm } from '../component/StartPage/WishForm';
 import { OtherWishes } from '../component/StartPage/OtherWishes';
+import { useState } from 'react';
+import { StarAnimation } from '../component/StartPage/StarAnimation';
 
 const StartPage = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  if (isSubmitted) {
+    return (
+      <LoadingContainer>
+        <LoadingTitle>
+          소원을 이뤄줄
+          <br /> 음악을 골라드릴게요!
+        </LoadingTitle>
+        <StarAnimation />
+      </LoadingContainer>
+    );
+  }
+
   return (
     <Container>
       <Header>새해첫곡</Header>
@@ -18,7 +34,7 @@ const StartPage = () => {
           노래를 추천해드려요!
         </Title>
       </TitleContainer>
-      <WishForm />
+      <WishForm setIsSubmitted={setIsSubmitted} />
       <OtherWishes />
       <Footer>
         <BottomRamji src={bottomRamji} />
@@ -33,6 +49,28 @@ const StartPage = () => {
 };
 
 export default StartPage;
+
+const LoadingContainer = styled.div`
+  @media (min-width: 500px) {
+    width: 31.25rem; //500px
+    margin: 0 auto;
+  }
+  width: 100%;
+  height: 100vh;
+  background-color: var(--beige);
+
+  position: relative;
+`;
+
+const LoadingTitle = styled.div`
+  text-align: center;
+  font-size: 2.25rem;
+  width: 100%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 50%;
+`;
 
 const Container = styled.div`
   @media (min-width: 500px) {

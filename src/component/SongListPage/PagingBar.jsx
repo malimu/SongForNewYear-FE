@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { atom } from 'recoil';
 
-export const PagingBar = ({ totalItems }) => {
+export const PagingBar = ({ totalItems, currentPage, setCurrentPage }) => {
   const ITEMS_PER_PAGE = 5;
   const TOTAL_PAGES = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const PAGES_PER_GROUP = 3;
 
   const [currentGroup, setCurrentGroup] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const startPage = (currentGroup - 1) * PAGES_PER_GROUP + 1;
   const endPage = Math.min(startPage + PAGES_PER_GROUP - 1, TOTAL_PAGES);

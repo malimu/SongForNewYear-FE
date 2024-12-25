@@ -4,8 +4,10 @@ import pinkstar from '../../assets/StartPage/pinkstar.svg';
 import yellowstar from '../../assets/StartPage/yellostar.svg';
 
 export const WishComponent = ({ wish, name, cat, idx }) => {
-  //const aniDelay = idx < 4 ? idx / 2 : 0;
-  const animation = useScrollFadeIn();
+  const aniDelay = idx / 2;
+  const animation = useScrollFadeIn({
+    delay: aniDelay,
+  });
 
   return (
     <Container $idx={idx} $cat={cat} {...animation}>

@@ -2,12 +2,15 @@ import styled from 'styled-components';
 import musicComp from '../../assets/SongListPage/musicComp.svg';
 
 export const SongComponent = ({ info }) => {
+  const onClickSongContainer = () => {
+    window.location = info.youtube_path;
+  };
   return (
     <Container $cat={info.category.toLowerCase()}>
       <Sparkle src={musicComp} />
       <Lyrics>“ {info.lyrics} ”</Lyrics>
-      <SongContainer>
-        <CoverImg />
+      <SongContainer onClick={onClickSongContainer}>
+        <CoverImg src={info.cover_path} />
         <InfoContainer>
           <Title>{info.title}</Title>
           <Singer>{info.artist}</Singer>

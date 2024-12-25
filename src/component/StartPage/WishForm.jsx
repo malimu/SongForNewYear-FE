@@ -5,20 +5,23 @@ import textareaSparkle from '../../assets/StartPage/textarea.svg';
 import { Button } from '../Button';
 import { CustomCheckbox } from './CustomCheckbox';
 import { useEffect, useState } from 'react';
+import { postWish } from '../../api/wish';
+import { useNavigate } from 'react-router-dom';
 
-export const WishForm = () => {
+export const WishForm = ({ setIsSubmitted }) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [wish, setWish] = useState({ name: null, content: null });
+  const [wish, setWish] = useState({ nickname: null, content: null });
   const [isActive, setIsActive] = useState(false);
+  const nav = useNavigate();
 
   useEffect(() => {
-    if (wish.name && wish.content) setIsActive(true);
+    if (wish.nickname && wish.content) setIsActive(true);
     else setIsActive(false);
   }, [wish]);
 
   const onChangeWish = (e) => {
     let { name, value } = e.target;
-    if (name == 'name' && value.length > 5) {
+    if (name == 'nickname' && value.length > 5) {
       value = value.substr(0, 5);
     } else if (name == 'content' && value.length > 50) {
       value = value.substr(0, 50);
@@ -32,6 +35,25 @@ export const WishForm = () => {
     }
   };
 
+  const submitWish = async () => {
+    try {
+      setIsSubmitted(true);
+      const data = {
+        nickname: wish.nickname,
+        content: wish.content,
+        is_displayed: isChecked,
+      };
+      const res = await postWish(data);
+      if (res) {
+        setTimeout(() => {
+          nav('/result', { state: { res } });
+        }, 1000);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Container>
       <NameContainer>
@@ -39,8 +61,8 @@ export const WishForm = () => {
         <InputWrapper>
           <NameInput
             type="text"
-            value={wish.name}
-            name="name"
+            value={wish.nickname}
+            name="nickname"
             onChange={onChangeWish}
             maxLength={5}
           />
@@ -70,7 +92,12 @@ export const WishForm = () => {
         <CustomCheckbox isChecked={isChecked} setIsChecked={setIsChecked} />
       </CheckboxContainer>
       <ButtonWrapper>
-        <Button text="소원 빌기" color="yellow" isActive={isActive} />
+        <Button
+          text="소원 빌기"
+          color="yellow"
+          isActive={isActive}
+          onClick={submitWish}
+        />
       </ButtonWrapper>
     </Container>
   );
