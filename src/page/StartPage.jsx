@@ -13,10 +13,10 @@ const StartPage = () => {
   if (isSubmitted) {
     return (
       <LoadingContainer>
-        <Title>
+        <LoadingTitle>
           소원을 이뤄줄
           <br /> 음악을 골라드릴게요!
-        </Title>
+        </LoadingTitle>
         <StarAnimation />
       </LoadingContainer>
     );
@@ -56,13 +56,20 @@ const LoadingContainer = styled.div`
     margin: 0 auto;
   }
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--beige);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15rem;
+  position: relative;
+`;
+
+const LoadingTitle = styled.div`
+  text-align: center;
+  font-size: 2.25rem;
+  width: 100%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 35%;
+  left: 50%;
 `;
 
 const Container = styled.div`

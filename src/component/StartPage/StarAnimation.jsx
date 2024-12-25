@@ -14,9 +14,11 @@ export const StarAnimation = () => {
 const bounce1 = keyframes`
   0%, 100% {
     transform: translateY(0);
+
   }
   50% {
-    transform: translateY(-25px); 
+    transform: translateY(-30px);
+
   }
 `;
 
@@ -25,6 +27,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 `;
 
 const Star = styled.img`

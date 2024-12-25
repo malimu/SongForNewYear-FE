@@ -5,10 +5,12 @@ import { WishComponent } from './WishComponent';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getRandomWish } from '../../api/wish';
+import { useRotateOnClick } from '../../hooks/useRotateOnClick';
 
 export const OtherWishes = () => {
   const nav = useNavigate();
   const [wishList, setWishList] = useState([]);
+  const rotate = useRotateOnClick();
 
   useEffect(() => {
     getWishList();
@@ -27,7 +29,7 @@ export const OtherWishes = () => {
     <Container>
       <TitleContainer>
         <Title>다른 사람들이 빈 소원</Title>
-        <ReloadIcon src={reloadIcon} onClick={getWishList} />
+        <ReloadIcon src={reloadIcon} onClick={getWishList} {...rotate} />
       </TitleContainer>
       <WishContainer>
         {wishList.map((item, idx) => (
