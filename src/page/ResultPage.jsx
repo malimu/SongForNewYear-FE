@@ -228,16 +228,15 @@ const SongContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 
-  padding: 0rem 3rem;
+  padding: 0rem 4rem;
   box-sizing: border-box;
 `;
 
 const AlbumCover = styled.img.attrs(() => ({
   crossOrigin: "anonymous",
 }))`
-  width: clamp(10rem, 40vw, 11rem);
+  width: clamp(7rem, 9rem, 10rem);
   aspect-ratio: 1 / 1;
   border-radius: 0.625rem;
   object-fit: cover;
