@@ -332,7 +332,7 @@ const Lyrics = styled.div`
 const SongTime = styled.div`
   text-align: center;
   width: 100%;
-  padding: 0rem 4rem;
+  padding: 0rem 2rem;
   box-sizing: border-box;
   display: -webkit-box;
   -webkit-line-clamp: 2;
