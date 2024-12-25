@@ -9,7 +9,7 @@ import { postWish } from '../../api/wish';
 import { useNavigate } from 'react-router-dom';
 
 export const WishForm = ({ setIsSubmitted }) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [wish, setWish] = useState({ nickname: null, content: null });
   const [isActive, setIsActive] = useState(false);
   const nav = useNavigate();
