@@ -9,7 +9,7 @@ import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
 import { useNavigate } from 'react-router-dom';
 
-export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyrics, artist }) => {
+export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyrics, artist, wishCount }) => {
     const nav = useNavigate();
     const shareUrl = window.location.href; // 배포 주소로 바꾸기
 
@@ -28,7 +28,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
 
     const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
 
-    const twitterText = `[${nickname} 님을 위한 새해첫곡]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
+    const twitterText = `[${nickname} 님을 위한 새해 첫곡]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
 
     const shareOnTwitter = () => {
         const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareUrl)}`;
@@ -36,12 +36,12 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
     };
 
     const shareOnKakao = () => {
-        if (window.Kakao) {
+        if (window.Kakao && window.Kakao.isInitialized()) {
             window.Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
-                    title: 'OO님을 위한 새해첫곡',
-                    description: `🎵행운을 빌어줘 - 원필\n" 내 앞길에 행운을 빌어줘 "\n원하는 대로 다 이룰 수 있는 새해가 될 거예요🌅`,
+                    title: `${nickname} 님을 위한 새해 첫곡`,
+                    description: `🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}`,
                     imageUrl: '',
                     link: {
                         mobileWebUrl: shareUrl,
@@ -50,7 +50,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
                 },
                 buttons: [
                     {
-                        title: '노래 보러 가기',
+                        title: '새해 첫곡 고르러 가기▶️',
                         link: {
                             mobileWebUrl: shareUrl,
                             webUrl: shareUrl,
@@ -59,7 +59,15 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
                 ],
             });
         } else {
-            alert('클립보드에 카카오톡 공유 링크가 복사되었습니다!');
+            navigator.clipboard.writeText(
+                `[${nickname} 님을 위한 새해첫곡]\n🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}\n${shareUrl}`
+            )
+            .then(() => {
+                alert('클립보드에 카카오톡 공유 내용이 복사되었습니다!');
+            })
+            .catch(() => {
+                alert('공유 링크 복사에 실패했습니다. 다시 시도해주세요.');
+            });
         }
     };
 
@@ -68,12 +76,6 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
             alert('공유 링크가 복사되었습니다!');
         });
     };
-
-    // useEffect(() => {
-    //     if (!window.Kakao?.isInitialized()) {
-    //         window.Kakao.init('REACT_APP_KAKAO_KEY');
-    //     }
-    // }, []);
 
     return (
         <BelowContainer>
@@ -87,7 +89,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
                 </ShareIcons>
             </ShareContainer>
             <Text>
-                지금까지 nnn명이<br />이 노래를 추천받았어요
+                지금까지 {wishCount}명이<br />이 노래를 추천받았어요
             </Text>
             <TitleText>
                 바로 들어보고 싶다면

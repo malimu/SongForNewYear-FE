@@ -110,6 +110,7 @@ const ResultPage = () => {
         songTitle={res.recommended_song.title}
         artist={res.recommended_song.artist}
         lyrics={res.recommended_song.lyrics}
+        wishCount={res.wishes_count}
       />
       <Footer>
         <FooterText>
