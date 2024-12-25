@@ -15,7 +15,7 @@ export const SongComponent = ({ info }) => {
       const [minutes, seconds] = parts;
       return minutes * 60 + seconds;
     }
-    throw new Error('Invalid time format');
+    //throw new Error('Invalid time format');
   };
 
   const formatTimeString = (time) => {
@@ -25,15 +25,17 @@ export const SongComponent = ({ info }) => {
       const totalMinutes = hours * 60 + minutes;
       return `${totalMinutes}:${seconds.toString().padStart(2, '0')}`;
     }
-    throw new Error('Invalid time format');
+    //throw new Error('Invalid time format' + info.title + info.time);
   };
 
   const start_time = formatTimeString(info.start_time);
   const total_time = formatTimeString(info.total_time);
 
   const progress =
-    (timeToSecond(info.start_time) / timeToSecond(info.total_time)).toFixed(2) *
-    100;
+    (
+      timeToSecond(info.start_time || '00:00:00') /
+      timeToSecond(info.total_time || '00:04:00')
+    ).toFixed(2) * 100;
 
   return (
     <Container $cat={info.category.toLowerCase()}>
@@ -45,14 +47,14 @@ export const SongComponent = ({ info }) => {
           <Title>{info.title}</Title>
           <Singer>{info.artist}</Singer>
           <ProgressBarContainer>
-            <Time>{start_time}</Time>
+            <Time>{start_time || 'mm:ss'}</Time>
             <Bar>
               <EntireBar />
               <ProgressBar $progress={progress} />
               <Progress $progress={progress} />
             </Bar>
 
-            <Time>{total_time}</Time>
+            <Time>{total_time || 'mm:ss'}</Time>
           </ProgressBarContainer>
         </InfoContainer>
       </SongContainer>
