@@ -2,6 +2,13 @@ import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import styled from 'styled-components';
 import Beginning from '../assets/ResultPage/result_beginning.svg';
+import Courage from '../assets/ResultPage/result_courage.svg';
+import Happiness from '../assets/ResultPage/result_happiness.svg';
+import Wealth from '../assets/ResultPage/result_wealth.svg';
+import Health from '../assets/ResultPage/result_health.svg';
+import Luck from '../assets/ResultPage/result_luck.svg';
+import Love from '../assets/ResultPage/result_love.svg';
+import Success from '../assets/ResultPage/result_success.svg';
 import { BelowContents } from '../component/ResultPage/BelowContents';
 
 const ResultPage = () => {

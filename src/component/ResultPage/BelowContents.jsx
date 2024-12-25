@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import YouTube from 'react-youtube';
 import { ImageDownloadButton } from './ImageDownloadButton';
@@ -10,6 +11,53 @@ import { useNavigate } from 'react-router-dom';
 
 export const BelowContents = ({ onCapture }) => {
     const nav = useNavigate();
+    const shareUrl = window.location.href; // 배포 주소로 바꾸기
+    const twitterText = `[OO님을 위한 새해첫곡]%0A🎵행운을 빌어줘 - 원필%0A" 내 앞길에 행운을 빌어줘 "%0A원하는 대로 다 이룰 수 있는 새해가 될 거예요🌅%0A새해 첫곡 고르러 가기▶️`;
+
+    const shareOnTwitter = () => {
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(twitterUrl, '_blank');
+    };
+
+    const shareOnKakao = () => {
+        if (window.Kakao) {
+            window.Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: 'OO님을 위한 새해첫곡',
+                    description: `🎵행운을 빌어줘 - 원필\n" 내 앞길에 행운을 빌어줘 "\n원하는 대로 다 이룰 수 있는 새해가 될 거예요🌅`,
+                    imageUrl: '',
+                    link: {
+                        mobileWebUrl: shareUrl,
+                        webUrl: shareUrl,
+                    },
+                },
+                buttons: [
+                    {
+                        title: '노래 보러 가기',
+                        link: {
+                            mobileWebUrl: shareUrl,
+                            webUrl: shareUrl,
+                        },
+                    },
+                ],
+            });
+        } else {
+            alert('클립보드에 카카오톡 공유 링크가 복사되었습니다!');
+        }
+    };
+
+    const copyLink = () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('공유 링크가 복사되었습니다!');
+        });
+    };
+
+    // useEffect(() => {
+    //     if (!window.Kakao?.isInitialized()) {
+    //         window.Kakao.init('REACT_APP_KAKAO_KEY');
+    //     }
+    // }, []);
 
     return (
         <BelowContainer>
@@ -17,9 +65,9 @@ export const BelowContents = ({ onCapture }) => {
             <ShareContainer>
                 <TitleText>공유하기</TitleText>
                 <ShareIcons>
-                    <Icon src={twitter}/>
-                    <Icon src={kakao}/>
-                    <Icon src={copylink}/>
+                    <Icon src={twitter} onClick={shareOnTwitter}/>
+                    <Icon src={kakao} onClick={shareOnKakao}/>
+                    <Icon src={copylink} onClick={copyLink}/>
                 </ShareIcons>
             </ShareContainer>
             <Text>
