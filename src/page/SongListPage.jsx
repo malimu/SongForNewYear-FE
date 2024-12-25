@@ -159,6 +159,9 @@ const Sparkle = styled.img`
   transform: translate(-50%, -50%);
   left: 50%;
   top: 4rem;
+
+  width: 90%;
+  height: auto;
 `;
 
 const Title = styled.div`
