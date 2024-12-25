@@ -32,15 +32,16 @@ export const OtherWishes = () => {
         <ReloadIcon src={reloadIcon} onClick={getWishList} {...rotate} />
       </TitleContainer>
       <WishContainer>
-        {wishList.map((item, idx) => (
-          <WishComponent
-            key={`${item.content}-${idx}`}
-            wish={item.content}
-            name={item.nickname}
-            cat={item.category.toLowerCase()}
-            idx={idx + 1}
-          />
-        ))}
+        {wishList &&
+          wishList.map((item, idx) => (
+            <WishComponent
+              key={`${item.content}-${idx}`}
+              wish={item.content}
+              name={item.nickname}
+              cat={item.category.toLowerCase()}
+              idx={idx + 1}
+            />
+          ))}
       </WishContainer>
       <ButtonWrapper>
         <Button
