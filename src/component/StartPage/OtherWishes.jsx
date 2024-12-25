@@ -37,7 +37,7 @@ export const OtherWishes = () => {
             key={`${item.content}-${idx}`}
             wish={item.content}
             name={item.nickname}
-            cat={'love'}
+            cat={item.category.toLowerCase()}
             idx={idx + 1}
           />
         ))}
@@ -81,6 +81,7 @@ const ReloadIcon = styled.img``;
 
 const WishContainer = styled.div`
   width: 100%;
+  min-height: 18rem;
   margin: 2rem 0 2.5rem;
   display: flex;
   flex-direction: column;
