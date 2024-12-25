@@ -37,7 +37,7 @@ export const OtherWishes = () => {
             key={`${item.content}-${idx}`}
             wish={item.content}
             name={item.nickname}
-            cat={'love'}
+            cat={item.category.toLowerCase()}
             idx={idx + 1}
           />
         ))}
