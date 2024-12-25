@@ -5,6 +5,36 @@ export const SongComponent = ({ info }) => {
   const onClickSongContainer = () => {
     window.location = info.youtube_path;
   };
+
+  const timeToSecond = (time) => {
+    const parts = time.split(':').map(Number);
+    if (parts.length === 3) {
+      const [hours, minutes, seconds] = parts;
+      return hours * 3600 + minutes * 60 + seconds;
+    } else if (parts.length === 2) {
+      const [minutes, seconds] = parts;
+      return minutes * 60 + seconds;
+    }
+    throw new Error('Invalid time format');
+  };
+
+  const formatTimeString = (time) => {
+    const parts = time.split(':').map(Number);
+    if (parts.length === 3) {
+      const [hours, minutes, seconds] = parts;
+      const totalMinutes = hours * 60 + minutes;
+      return `${totalMinutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    throw new Error('Invalid time format');
+  };
+
+  const start_time = formatTimeString(info.start_time);
+  const total_time = formatTimeString(info.total_time);
+
+  const progress =
+    (timeToSecond(info.start_time) / timeToSecond(info.total_time)).toFixed(2) *
+    100;
+
   return (
     <Container $cat={info.category.toLowerCase()}>
       <Sparkle src={musicComp} />
@@ -15,14 +45,14 @@ export const SongComponent = ({ info }) => {
           <Title>{info.title}</Title>
           <Singer>{info.artist}</Singer>
           <ProgressBarContainer>
-            <Time>1:40</Time>
+            <Time>{start_time}</Time>
             <Bar>
               <EntireBar />
-              <ProgressBar />
-              <Progress />
+              <ProgressBar $progress={progress} />
+              <Progress $progress={progress} />
             </Bar>
 
-            <Time>3:16</Time>
+            <Time>{total_time}</Time>
           </ProgressBarContainer>
         </InfoContainer>
       </SongContainer>
@@ -139,7 +169,7 @@ const EntireBar = styled.hr`
 `;
 
 const ProgressBar = styled.hr`
-  width: 30%;
+  width: ${({ $progress }) => `${$progress}%`};
   height: 0.125rem;
 
   background-color: var(--brown);
@@ -161,6 +191,6 @@ const Progress = styled.div`
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
-  left: 30%;
+  left: ${({ $progress }) => `${$progress}%`};
   z-index: 6;
 `;
