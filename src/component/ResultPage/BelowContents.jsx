@@ -6,8 +6,11 @@ import twitter from '../../assets/ResultPage/twitter_icon.svg';
 import kakao from '../../assets/ResultPage/kakao_icon.svg';
 import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const BelowContents = ({ onCapture }) => {
+    const nav = useNavigate();
+
     return (
         <BelowContainer>
             <ImageDownloadButton onClick={onCapture} />
@@ -39,8 +42,8 @@ export const BelowContents = ({ onCapture }) => {
                 />
             </YouTubeContainer>
             <ButtonsContainer>
-                <Button text="다른 소원 빌기" color="yellow" isActive={true} />
-                <Button text="노래 전체 목록 보기" color="brown" isActive={true} />
+                <Button text="다른 소원 빌기" color="yellow" isActive={true} onClick={() => nav('/')} />
+                <Button text="노래 전체 목록 보기" color="brown" isActive={true} onClick={() => nav('/songlist')} />
             </ButtonsContainer>
         </BelowContainer>
     );
