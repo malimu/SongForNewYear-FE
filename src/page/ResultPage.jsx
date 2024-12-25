@@ -1,28 +1,76 @@
 import React, { useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import styled from 'styled-components';
 import Beginning from '../assets/ResultPage/result_beginning.svg';
+import Courage from '../assets/ResultPage/result_courage.svg';
+import Happiness from '../assets/ResultPage/result_happiness.svg';
+import Wealth from '../assets/ResultPage/result_wealth.svg';
+import Health from '../assets/ResultPage/result_health.svg';
+import Luck from '../assets/ResultPage/result_luck.svg';
+import Love from '../assets/ResultPage/result_love.svg';
+import Success from '../assets/ResultPage/result_success.svg';
 import { BelowContents } from '../component/ResultPage/BelowContents';
 
 const ResultPage = () => {
   const captureRef = useRef(null);
 
-  const wishText = "로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨! 로또 1등 당첨!";
+  const location = useLocation();
+  const { state } = location || {};
+  const res = state?.res;
+
+  const categoryImageMap = {
+    WEALTH: Wealth,
+    BEGINNING: Beginning,
+    LOVE: Love,
+    COURAGE: Courage,
+    HAPPINESS: Happiness,
+    HEALTH: Health,
+    LUCK: Luck,
+    SUCCESS: Success,
+  };
+
+  const categoryTextColorMap = {
+    WEALTH: 'var(--wealthTxt)',
+    BEGINNING: 'var(--beginningTxt)',
+    LOVE: 'var(--loveTxt)',
+    COURAGE: 'var(--courageTxt)',
+    HAPPINESS: 'var(--happinessTxt)',
+    HEALTH: 'var(--healthTxt)',
+    LUCK: 'var(--luckTxt)',
+    SUCCESS: 'var(--successTxt)',
+  };
+
+  const resultCardImage = categoryImageMap[res?.category] || Courage;
+  const timeTextColor = categoryTextColorMap[res?.category] || 'var(--courageTxt)';
+
+  const wishText = res.wish;
   const wishLength = wishText.length;
 
-  const songTitleText = "Do You Hear The People Sing?";
+  const songTitleText = res.recommended_song.title;
   const songTitleLength = songTitleText.length;
 
-  const artistText = "Aaron Tveit, Eddie Redmayne, Students, Les Misérables Cast";
+  const artistText = res.recommended_song.artist;
   const artistLength = artistText.length;
 
-  const LyricsText = "반짝이는 꿈들로 가득 찬 저 세상이 날 부르고 있잖아 조금 더 가보자";
+  const LyricsText = res.recommended_song.lyrics;
   const LyricsLength = LyricsText.length;
+
+  const resTime = res.recommended_song.recommend_time.split(",")[1];
+  const [hh, mm, ss] = resTime.split(":");
+  const formattedTime = `${hh}시 ${mm}분 ${ss}초`;
+
+  const url = res.recommended_song.youtube_path;
+  const videoCode = url.split("v=")[1];
+
 
   const handleCapture = async () => {
     if (!captureRef.current) return;
 
-    const canvas = await html2canvas(captureRef.current);
+    const canvas = await html2canvas(captureRef.current, {
+      useCORS: true, // CORS 이미지 허용
+      logging: true,
+    });
     const link = document.createElement('a');
     link.download = 'songfornewyear_result.png';
     link.href = canvas.toDataURL();
@@ -33,15 +81,15 @@ const ResultPage = () => {
     <Container>
       <CardContainer ref={captureRef}>
         <ResultCardContainer>
-          <ResultCard src={Beginning} />
+          <ResultCard src={resultCardImage} />
           <TitleContainer>
-            <Title>뷁뷁뷁뷁뷁 님의 소원</Title>
+            <Title>{res.nickname} 님의 소원</Title>
           </TitleContainer>
           <WishContainer>
             <Wish textLength={wishLength}>{wishText}</Wish>
           </WishContainer>
           <SongContainer>
-            <AlbumCover />
+            <AlbumCover src={res.recommended_song.cover_path}/>
             <SongTextContainer>
               <SongTitle textLength={songTitleLength}>{songTitleText}</SongTitle>
               <SongArtist textLength={artistLength}>{artistText}</SongArtist>
@@ -52,10 +100,18 @@ const ResultPage = () => {
           </LyricsContainer>
         </ResultCardContainer>
         <SongTime>
-          12월 31일 <TimeColor>23시 59분 05초</TimeColor>에 재생 시 <br />이 가사로 한 해를 시작할 수 있어요!
+          12월 31일 <TimeColor style={{ color: timeTextColor }}>{formattedTime}</TimeColor>에 재생 시 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
       </CardContainer>
-      <BelowContents onCapture={handleCapture} />
+      <BelowContents 
+        onCapture={handleCapture} 
+        videoCode={videoCode}
+        nickname={res.nickname}
+        songTitle={res.recommended_song.title}
+        artist={res.recommended_song.artist}
+        lyrics={res.recommended_song.lyrics}
+        wishCount={res.wishes_count}
+      />
       <Footer>
         <FooterText>
           @ 2024 Team Malimu
@@ -143,7 +199,7 @@ const WishContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 3.2rem;
+  padding: 1rem 4rem;
   box-sizing: border-box;
 `;
 
@@ -172,17 +228,21 @@ const SongContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
 
-  padding: 0rem 2.5rem;
+  padding: 0rem 4rem;
   box-sizing: border-box;
 `;
 
-const AlbumCover = styled.img`
-  width: clamp(10rem, 40vw, 13rem);
+const AlbumCover = styled.img.attrs(() => ({
+  crossOrigin: "anonymous",
+}))`
+  width: clamp(7rem, 9rem, 10rem);
   aspect-ratio: 1 / 1;
   border-radius: 0.625rem;
-  background: url(<path-to-image>) #FFE4A4 50% / cover no-repeat;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: center;
+  background-color: #FFE4A4;
 `;
 
 const SongTextContainer = styled.div`
@@ -230,10 +290,11 @@ const LyricsContainer = styled.div`
   top: 80%;
   width: 100%;
   height: clamp(6rem, 6rem + 5vw, 9rem);
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 4rem;
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const Lyrics = styled.div`
@@ -264,7 +325,6 @@ const SongTime = styled.div`
 `;
 
 const TimeColor = styled.div`
-  color: #2C5EA7;
   display: inline;
 `;
 

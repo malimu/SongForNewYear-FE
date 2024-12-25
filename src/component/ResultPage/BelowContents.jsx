@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import YouTube from 'react-youtube';
 import { ImageDownloadButton } from './ImageDownloadButton';
@@ -8,8 +9,73 @@ import copylink from '../../assets/ResultPage/copylink_icon.svg';
 import spark from '../../assets/ResultPage/light_object.svg';
 import { useNavigate } from 'react-router-dom';
 
-export const BelowContents = ({ onCapture }) => {
+export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyrics, artist, wishCount }) => {
     const nav = useNavigate();
+    const shareUrl = window.location.href; // 배포 주소로 바꾸기
+
+    const messagesArray = [
+        "원하는 대로 다 이룰 수 있는 새해가 될 거예요🌄",
+        "마음껏 사랑하는 한 해이길 바라요💕",
+        "가고 싶은 대로 길이 만들어질 거예요🏃💨",
+        "행운🍀도 행복☘️도 가득한 새해가 되길",
+        "꿈꿔온 모든 것이 펼쳐지는 한 해일 거예요🌟",
+        "소중한 사람들과 소중한 추억을 만들어요🎆",
+        "한 걸음씩 나아가는 용기 있는 한 해가 될 거예요💪",
+        "새로운 시작, 새로운 기회가 함께하는 한 해 되세요✈️",
+        "웃음 가득한 새해가 될 거예요😄",
+        "반짝반짝 빛나는 한 해가 될 거예요✨",
+    ];
+
+    const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
+
+    const twitterText = `[${nickname} 님을 위한 새해 첫곡]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
+
+    const shareOnTwitter = () => {
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(twitterUrl, '_blank');
+    };
+
+    const shareOnKakao = () => {
+        if (window.Kakao && window.Kakao.isInitialized()) {
+            window.Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: `${nickname} 님을 위한 새해 첫곡`,
+                    description: `🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}`,
+                    imageUrl: '',
+                    link: {
+                        mobileWebUrl: shareUrl,
+                        webUrl: shareUrl,
+                    },
+                },
+                buttons: [
+                    {
+                        title: '새해 첫곡 고르러 가기▶️',
+                        link: {
+                            mobileWebUrl: shareUrl,
+                            webUrl: shareUrl,
+                        },
+                    },
+                ],
+            });
+        } else {
+            navigator.clipboard.writeText(
+                `[${nickname} 님을 위한 새해첫곡]\n🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}\n${shareUrl}`
+            )
+            .then(() => {
+                alert('클립보드에 카카오톡 공유 내용이 복사되었습니다!');
+            })
+            .catch(() => {
+                alert('공유 링크 복사에 실패했습니다. 다시 시도해주세요.');
+            });
+        }
+    };
+
+    const copyLink = () => {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('공유 링크가 복사되었습니다!');
+        });
+    };
 
     return (
         <BelowContainer>
@@ -17,13 +83,13 @@ export const BelowContents = ({ onCapture }) => {
             <ShareContainer>
                 <TitleText>공유하기</TitleText>
                 <ShareIcons>
-                    <Icon src={twitter}/>
-                    <Icon src={kakao}/>
-                    <Icon src={copylink}/>
+                    <Icon src={twitter} onClick={shareOnTwitter}/>
+                    <Icon src={kakao} onClick={shareOnKakao}/>
+                    <Icon src={copylink} onClick={copyLink}/>
                 </ShareIcons>
             </ShareContainer>
             <Text>
-                지금까지 nnn명이<br />이 노래를 추천받았어요
+                지금까지 {wishCount}명이<br />이 노래를 추천받았어요
             </Text>
             <TitleText>
                 바로 들어보고 싶다면
@@ -31,7 +97,7 @@ export const BelowContents = ({ onCapture }) => {
             <YouTubeContainer>
                 <Spark src={spark} />
                 <YouTube 
-                    videoId='YLxEK0ZKx9A'
+                    videoId={videoCode}
                     opts={{
                         playerVars: {
                             autoplay: 1,

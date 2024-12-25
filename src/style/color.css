@@ -5,18 +5,26 @@
   --beige: #fffdf1;
   --beginning: #afbccf;
   --beginning80: #afbccfcc;
+  --beginningTxt: #2c5ea7;
   --success: #c1d9de;
   --success80: #c1d9decc;
+  --successTxt: #2f94aa;
   --health: #a9ddd0;
   --health80: #a9ddd0cc;
+  --healthTxt: #089270;
   --luck: #dae9b3;
   --luck80: #dae9b3cc;
+  --luckTxt: #4e841b;
   --wealth: #fcecae;
   --wealth80: #fcecaecc;
+  --wealthTxt: #dcb10b;
   --happiness: #ffdfbb;
   --happiness80: #ffdfbbcc;
+  --happiness: #d77c15;
   --love: #ffe4e4;
   --love80: #ffe4e4cc;
+  --loveTxt: #a13636;
   --courage: #ddd4e5;
   --courage80: #ddd4e5cc;
+  --courageTxt: #4c0d84;
 }
