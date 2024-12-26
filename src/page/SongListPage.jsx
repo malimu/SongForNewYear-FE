@@ -69,6 +69,7 @@ const SongListPage = () => {
     } else {
       setFilter(cat);
     }
+    setCurrentPage(1);
   };
 
   return (
