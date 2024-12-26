@@ -114,6 +114,8 @@ const SongContainer = styled.div`
 
   border-radius: 0.625rem;
   background: rgba(255, 255, 255, 0.5);
+
+  cursor: pointer;
 `;
 
 const CoverImg = styled.img`

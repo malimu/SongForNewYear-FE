@@ -31,7 +31,7 @@ const filterMap = {
 };
 
 const SongListPage = () => {
-  const [isSticky, setIsSticky] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
   const [filter, setFilter] = useState(null);
   const [songData, setSongData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
