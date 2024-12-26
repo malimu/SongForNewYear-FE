@@ -86,6 +86,7 @@ const ResultPage = () => {
     if (!captureRef.current) return;
 
     const canvas = await html2canvas(captureRef.current, {
+      scale: window.devicePixelRatio, // ios Retina 디스플레이 대응
       useCORS: true, // CORS 이미지 허용
       logging: true,
     });
@@ -236,7 +237,7 @@ const WishContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 4rem;
+  padding: 1rem 3rem;
   box-sizing: border-box;
 `;
 
