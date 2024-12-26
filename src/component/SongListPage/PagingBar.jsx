@@ -82,8 +82,10 @@ export const Container = styled.div`
 
 export const Arrow = styled.div`
   visibility: ${({ $isActive }) => !$isActive && 'hidden'};
+  cursor: pointer;
 `;
 
 export const Page = styled.div`
   color: ${({ $isActive }) => $isActive && 'var(--brown)'};
+  cursor: pointer;
 `;
