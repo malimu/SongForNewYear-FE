@@ -90,6 +90,7 @@ const ResultPage = () => {
       useCORS: true, // CORS 이미지 허용
       logging: true,
     });
+    
     const link = document.createElement('a');
     link.download = 'songfornewyear_result.png';
     link.href = canvas.toDataURL();
@@ -199,9 +200,12 @@ const ResultCardContainer = styled.div`
   height: auto;
 `;
 
-const ResultCard = styled.img`
+const ResultCard = styled.div`
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  height: auto;
+  aspect-ratio: 3360 / 5415;
 `;
 
 const TitleContainer = styled.div`
@@ -325,7 +329,7 @@ const SongArtist = styled.div`
 
 const LyricsContainer = styled.div`
   position: absolute;
-  top: 88.5%;
+  top: 89%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
