@@ -31,19 +31,11 @@ const filterMap = {
 };
 
 const SongListPage = () => {
-  const [isSticky, setIsSticky] = useState(true);
+  const [isSticky, setIsSticky] = useState(false);
   const [filter, setFilter] = useState(null);
   const [songData, setSongData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [isFontLoaded, setIsFontLoaded] = useState(false);
   const nav = useNavigate();
-
-  useEffect(() => {
-    // 폰트 로딩 상태 확인
-    document.fonts.ready.then(() => {
-      setIsFontLoaded(true); // 폰트 로딩 완료
-    });
-  }, []);
 
   useEffect(() => {
     const getSongData = async () => {
@@ -92,50 +84,46 @@ const SongListPage = () => {
 
   return (
     <Container>
-      {isFontLoaded && (
-        <>
-          <Header onClick={() => nav('/')}>새해첫곡</Header>
-          <TitleContainer>
-            <Sparkle src={sparkleRamji} />
-            <Title>노래 목록 보기</Title>
-          </TitleContainer>
-          <FilterContainer>
-            {filterList.map((cat, idx) => (
-              <FilterButton
-                key={idx}
-                $isActive={filter === cat}
-                $color={filterMap[cat]}
-                onClick={() => onClickFilter(cat)}
-              >
-                {cat}
-              </FilterButton>
-            ))}
-          </FilterContainer>
-          <SongListContainer>
-            {songData.data &&
-              songData.data.map((item) => <SongComponent info={item} />)}
-          </SongListContainer>
-          <BottomContainer $isSticky={isSticky}>
-            <PagingBar
-              totalItems={songData.total_items || 1}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-            <Footer>
-              <FooterText>
-                @ 2024 Team Malimu
-                <br />
-                All Rights Reserved
-              </FooterText>
+      <Header onClick={() => nav('/')}>새해첫곡</Header>
+      <TitleContainer>
+        <Sparkle src={sparkleRamji} />
+        <Title>노래 목록 보기</Title>
+      </TitleContainer>
+      <FilterContainer>
+        {filterList.map((cat, idx) => (
+          <FilterButton
+            key={idx}
+            $isActive={filter === cat}
+            $color={filterMap[cat]}
+            onClick={() => onClickFilter(cat)}
+          >
+            {cat}
+          </FilterButton>
+        ))}
+      </FilterContainer>
+      <SongListContainer>
+        {songData.data &&
+          songData.data.map((item) => <SongComponent info={item} />)}
+      </SongListContainer>
+      <BottomContainer $isSticky={isSticky}>
+        <PagingBar
+          totalItems={songData.total_items || 1}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+        <Footer>
+          <FooterText>
+            @ 2024 Team Malimu
+            <br />
+            All Rights Reserved
+          </FooterText>
 
-              <IconContainer>
-                <Insta src={instaIcon} onClick={onClickInsta} />
-                <X src={xIcon} onClick={onClickX} />
-              </IconContainer>
-            </Footer>
-          </BottomContainer>
-        </>
-      )}
+          <IconContainer>
+            <Insta src={instaIcon} onClick={onClickInsta} />
+            <X src={xIcon} onClick={onClickX} />
+          </IconContainer>
+        </Footer>
+      </BottomContainer>
     </Container>
   );
 };

@@ -115,7 +115,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
                 />
             </YouTubeContainer>
             <ButtonsContainer>
-                <Button text="다른 소원 빌기" color="yellow" isActive={true} onClick={() => nav('/')} />
+                <Button text="다른 소원 빌기" color="yellow" isActive={true} onClick={() => nav('/', { state: { scrollToTop: true } })} />
                 <Button text="노래 전체 목록 보기" color="brown" isActive={true} onClick={() => nav('/songlist')} />
             </ButtonsContainer>
         </BelowContainer>
