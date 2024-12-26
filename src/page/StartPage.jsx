@@ -6,11 +6,19 @@ import instaIcon from '../assets/StartPage/brand_instagram.svg';
 import xIcon from '../assets/StartPage/brand_x.svg';
 import { WishForm } from '../component/StartPage/WishForm';
 import { OtherWishes } from '../component/StartPage/OtherWishes';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StarAnimation } from '../component/StartPage/StarAnimation';
+import { useLocation } from 'react-router-dom';
 
 const StartPage = () => {
+  const location = useLocation();
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.scrollToTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
 
   if (isSubmitted) {
     return (
