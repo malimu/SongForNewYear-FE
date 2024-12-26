@@ -329,7 +329,7 @@ const SongArtist = styled.div`
 
 const LyricsContainer = styled.div`
   position: absolute;
-  top: 88.5%;
+  top: 89%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
