@@ -7,6 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<StartPage />} />
+      <Route path="/result" element={<Navigate to="/" replace />} />
       <Route path="/result/:wishId" element={<ResultPage />} />
       <Route path="/songlist" element={<SongListPage />} />
     </Routes>
