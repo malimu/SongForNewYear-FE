@@ -215,7 +215,7 @@ const WishContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 1rem 4rem;
+  padding: 1rem 3rem;
   box-sizing: border-box;
 `;
 
