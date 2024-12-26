@@ -34,7 +34,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
 
     const message = messagesArray[Math.floor(Math.random() * messagesArray.length)];
 
-    const twitterText = `[${nickname} 님을 위한 새해 첫곡]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
+    const twitterText = `[ ${nickname} 님을 위한 #새해첫곡 ]%0A🎵${songTitle} - ${artist}%0A" ${lyrics} "%0A${message}%0A새해 첫곡 고르러 가기▶️`;
 
     const shareOnTwitter = () => {
         const twitterUrl = `https://twitter.com/intent/tweet?text=${twitterText}&url=${encodeURIComponent(shareUrl)}`;
@@ -67,7 +67,7 @@ export const BelowContents = ({ onCapture, videoCode, nickname, songTitle, lyric
             });
         } else {
             navigator.clipboard.writeText(
-                `[${nickname} 님을 위한 새해첫곡]\n🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}\n${shareUrl}`
+                `[ ${nickname} 님을 위한 #새해첫곡 ]\n🎵${songTitle} - ${artist}\n" ${lyrics} "\n${message}\n${shareUrl}`
             )
             .then(() => {
                 alert('클립보드에 카카오톡 공유 내용이 복사되었습니다!');
