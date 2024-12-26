@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useState } from 'react';
-import { atom } from 'recoil';
+import { useState, useEffect } from 'react';
 
 export const PagingBar = ({ totalItems, currentPage, setCurrentPage }) => {
+  console.log(totalItems);
+
   const ITEMS_PER_PAGE = 5;
   const TOTAL_PAGES = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const PAGES_PER_GROUP = 3;
@@ -11,6 +12,10 @@ export const PagingBar = ({ totalItems, currentPage, setCurrentPage }) => {
 
   const startPage = (currentGroup - 1) * PAGES_PER_GROUP + 1;
   const endPage = Math.min(startPage + PAGES_PER_GROUP - 1, TOTAL_PAGES);
+
+  useEffect(() => {
+    setCurrentGroup(Math.ceil(currentPage / PAGES_PER_GROUP));
+  }, [currentPage]);
 
   const onClickPage = (page) => {
     setCurrentPage(page);
