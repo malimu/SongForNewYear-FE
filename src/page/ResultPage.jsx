@@ -162,6 +162,8 @@ const ResultPage = () => {
           </TimeColor>
           에 재생하면 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
+        <Watermark>새해첫곡</Watermark>
+        <SNSId>@songfornewyear</SNSId>
       </CardContainer>
       <BelowContents
         onCapture={handleCapture}
@@ -209,6 +211,34 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const Watermark = styled.div`
+  width: 100%;
+  opacity: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  font-family: 'Mungyeong-Gamhong-Apple';
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.2rem 2rem;
+  box-sizing: border-box;
+`;
+
+const SNSId = styled.div`
+  width: 100%;
+  opacity: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  font-size: 0.7rem;
+  padding: 0rem 2rem;
+  box-sizing: border-box;
 `;
 
 const CardContainer = styled.div`
