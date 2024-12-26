@@ -64,7 +64,7 @@ export const SongComponent = ({ info }) => {
 
 const Container = styled.div`
   width: 100%;
-  height: 10.3125rem;
+  min-height: 10.3125rem;
 
   display: flex;
   flex-direction: column;
@@ -72,6 +72,7 @@ const Container = styled.div`
 
   padding: 0.75rem;
   box-sizing: border-box;
+  gap: 0.63rem;
 
   border-radius: 1.25rem;
   border: 1.5px solid var(--brown);
@@ -94,7 +95,7 @@ const Lyrics = styled.div`
 
   font-size: 1.25rem;
   width: 85%;
-  height: calc(100% - 5rem - 0.63rem);
+  min-height: 2.875rem;
   white-space: pre-wrap;
   text-align: center;
 `;
