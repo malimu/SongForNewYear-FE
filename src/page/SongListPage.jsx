@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import sparkleRamji from '../assets/SongListPage/songlist.svg';
+import instaIcon from '../assets/StartPage/brand_instagram.svg';
+import xIcon from '../assets/StartPage/brand_x.svg';
 import { SongComponent } from '../component/SongListPage/SongComponent';
 import { PagingBar } from '../component/SongListPage/PagingBar';
 import { useEffect, useState } from 'react';
@@ -69,6 +71,15 @@ const SongListPage = () => {
     } else {
       setFilter(cat);
     }
+    setCurrentPage(1);
+  };
+
+  const onClickInsta = () => {
+    window.location = 'https://www.instagram.com/songfornewyear/';
+  };
+
+  const onClickX = () => {
+    window.location = 'https://x.com/songfornewyear';
   };
 
   return (
@@ -101,9 +112,16 @@ const SongListPage = () => {
           setCurrentPage={setCurrentPage}
         />
         <Footer>
-          @ 2024 Team Malimu
-          <br />
-          All Rights Reserved
+          <FooterText>
+            @ 2024 Team Malimu
+            <br />
+            All Rights Reserved
+          </FooterText>
+
+          <IconContainer>
+            <Insta src={instaIcon} onClick={onClickInsta} />
+            <X src={xIcon} onClick={onClickX} />
+          </IconContainer>
         </Footer>
       </BottomContainer>
     </Container>
@@ -198,7 +216,6 @@ const FilterButton = styled.button`
 
 const SongListContainer = styled.div`
   width: 100%;
-  //min-height: 56rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -219,12 +236,26 @@ const BottomContainer = styled.div`
 
 const Footer = styled.div`
   width: 100%;
-  height: 10rem;
+  height: 12.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
-  font-size: 1.25rem;
+  gap: 1.2rem;
+`;
+
+const FooterText = styled.div`
   color: var(--browngray);
+  font-size: 1.25rem;
   text-align: center;
 `;
+
+const IconContainer = styled.div`
+  display: flex;
+  gap: 2.87rem;
+`;
+
+const Insta = styled.img``;
+
+const X = styled.img``;

@@ -46,7 +46,7 @@ export const WishForm = ({ setIsSubmitted }) => {
       const res = await postWish(data);
       if (res) {
         setTimeout(() => {
-          nav('/result', { state: { res } });
+          nav(`/result/${res.wish_id}`, { state: { res } });
         }, 1000);
       }
       console.log(res);
