@@ -6,19 +6,11 @@ import instaIcon from '../assets/StartPage/brand_instagram.svg';
 import xIcon from '../assets/StartPage/brand_x.svg';
 import { WishForm } from '../component/StartPage/WishForm';
 import { OtherWishes } from '../component/StartPage/OtherWishes';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StarAnimation } from '../component/StartPage/StarAnimation';
 
 const StartPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isFontLoaded, setIsFontLoaded] = useState(false);
-
-  useEffect(() => {
-    // 폰트 로딩 상태 확인
-    document.fonts.ready.then(() => {
-      setIsFontLoaded(true); // 폰트 로딩 완료
-    });
-  }, []);
 
   if (isSubmitted) {
     return (
@@ -42,34 +34,30 @@ const StartPage = () => {
 
   return (
     <Container>
-      {isFontLoaded && (
-        <>
-          <Header>새해첫곡</Header>
-          <TitleContainer>
-            <Title>
-              <SparkleYellow src={sparkleYellow} />
-              <Daramgi src={DJRamji} />
-              새해 소원을 이뤄줄
-              <br />
-              노래를 추천해드려요!
-            </Title>
-          </TitleContainer>
-          <WishForm setIsSubmitted={setIsSubmitted} />
-          <OtherWishes />
-          <Footer>
-            <BottomRamji src={bottomRamji} />
-            <FooterText>
-              @ 2024 Team Malimu
-              <br />
-              All Rights Reserved
-            </FooterText>
-            <IconContainer>
-              <Insta src={instaIcon} onClick={onClickInsta} />
-              <X src={xIcon} onClick={onClickX} />
-            </IconContainer>
-          </Footer>
-        </>
-      )}
+      <Header>새해첫곡</Header>
+      <TitleContainer>
+        <Title>
+          <SparkleYellow src={sparkleYellow} />
+          <Daramgi src={DJRamji} />
+          새해 소원을 이뤄줄
+          <br />
+          노래를 추천해드려요!
+        </Title>
+      </TitleContainer>
+      <WishForm setIsSubmitted={setIsSubmitted} />
+      <OtherWishes />
+      <Footer>
+        <BottomRamji src={bottomRamji} />
+        <FooterText>
+          @ 2024 Team Malimu
+          <br />
+          All Rights Reserved
+        </FooterText>
+        <IconContainer>
+          <Insta src={instaIcon} onClick={onClickInsta} />
+          <X src={xIcon} onClick={onClickX} />
+        </IconContainer>
+      </Footer>
     </Container>
   );
 };
