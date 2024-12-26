@@ -86,8 +86,7 @@ const ResultPage = () => {
     }
   } else {
     // 쉼표가 없을 경우 예외 처리
-    const [hh, mm, ss] = recommendTime.split(':');
-    formattedTime = `${hh}시 ${mm}분 ${ss}초`;
+    formattedTime = '23시 59분 59초';
   }
 
   const url = res.recommended_song.youtube_path;
