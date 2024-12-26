@@ -84,6 +84,7 @@ const ResultPage = () => {
     if (!captureRef.current) return;
 
     const canvas = await html2canvas(captureRef.current, {
+      scale: window.devicePixelRatio, // ios Retina 디스플레이 대응
       useCORS: true, // CORS 이미지 허용
       logging: true,
     });
