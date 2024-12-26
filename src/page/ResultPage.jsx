@@ -59,9 +59,25 @@ const ResultPage = () => {
   const LyricsText = res.recommended_song.lyrics;
   const LyricsLength = LyricsText.length;
 
-  const resTime = res.recommended_song.recommend_time.split(',')[1];
-  const [hh, mm, ss] = resTime.split(':');
-  const formattedTime = `${hh}시 ${mm}분 ${ss}초`;
+  const recommendTime = res.recommended_song.recommend_time;
+  let formattedTime = `알 수 없음`
+
+  // 데이터 요소가 쉼표로 나뉘어 2개일 경우만 split
+  if (recommendTime.includes(',')) {
+    const parts = recommendTime.split(',');
+    if (parts.length === 2) {
+      const resTime = parts[1].trim();
+
+      const [hh, mm, ss] = resTime.split(':');
+      formattedTime = `${hh}시 ${mm}분 ${ss}초`;
+    } else {
+      console.error('데이터 포맷 에러');
+    }
+  } else {
+    // 쉼표가 없을 경우 예외 처리
+    const [hh, mm, ss] = recommendTime.split(':');
+    formattedTime = `${hh}시 ${mm}분 ${ss}초`;
+  }
 
   const url = res.recommended_song.youtube_path;
   const extractVideoCode = (url) => {
@@ -271,7 +287,7 @@ const SongContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 0rem 4rem;
+  padding: 0rem 3rem;
   box-sizing: border-box;
 `;
 
