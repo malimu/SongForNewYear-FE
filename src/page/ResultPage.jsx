@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import styled from 'styled-components';
 import Beginning from '../assets/ResultPage/result_beginning.svg';
@@ -18,8 +18,19 @@ const ResultPage = () => {
   const captureRef = useRef(null);
 
   const location = useLocation();
+  const nav = useNavigate();
   const { state } = location || {};
   const res = state?.res;
+
+  useEffect(() => {
+    if (!state || !state.res) {
+      nav('/');
+    }
+  }, [state, nav]);
+
+  if (!state || !state.res) {
+    return null;
+  }
 
   const categoryImageMap = {
     WEALTH: Wealth,
