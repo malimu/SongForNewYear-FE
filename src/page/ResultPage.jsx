@@ -10,6 +10,8 @@ import Health from '../assets/ResultPage/result_health.svg';
 import Luck from '../assets/ResultPage/result_luck.svg';
 import Love from '../assets/ResultPage/result_love.svg';
 import Success from '../assets/ResultPage/result_success.svg';
+import instaIcon from '../assets/StartPage/brand_instagram.svg';
+import xIcon from '../assets/StartPage/brand_x.svg';
 import { BelowContents } from '../component/ResultPage/BelowContents';
 
 const ResultPage = () => {
@@ -42,7 +44,8 @@ const ResultPage = () => {
   };
 
   const resultCardImage = categoryImageMap[res?.category] || Courage;
-  const timeTextColor = categoryTextColorMap[res?.category] || 'var(--courageTxt)';
+  const timeTextColor =
+    categoryTextColorMap[res?.category] || 'var(--courageTxt)';
 
   const wishText = res.wish;
   const wishLength = wishText.length;
@@ -56,8 +59,8 @@ const ResultPage = () => {
   const LyricsText = res.recommended_song.lyrics;
   const LyricsLength = LyricsText.length;
 
-  const resTime = res.recommended_song.recommend_time.split(",")[1];
-  const [hh, mm, ss] = resTime.split(":");
+  const resTime = res.recommended_song.recommend_time.split(',')[1];
+  const [hh, mm, ss] = resTime.split(':');
   const formattedTime = `${hh}시 ${mm}분 ${ss}초`;
 
   const url = res.recommended_song.youtube_path;
@@ -66,19 +69,18 @@ const ResultPage = () => {
       const urlObj = new URL(url);
 
       // 짧은 URL 처리
-      if (urlObj.hostname === "youtu.be") {
-          return urlObj.pathname.slice(1);
+      if (urlObj.hostname === 'youtu.be') {
+        return urlObj.pathname.slice(1);
       }
 
       // 일반 YouTube URL 처리
       const params = new URLSearchParams(urlObj.search);
-      return params.get("v") || null;
+      return params.get('v') || null;
     } catch {
-        return null;
+      return null;
     }
   };
   const videoCode = extractVideoCode(url);
-
 
   const handleCapture = async () => {
     if (!captureRef.current) return;
@@ -93,6 +95,14 @@ const ResultPage = () => {
     link.click();
   };
 
+  const onClickInsta = () => {
+    window.location = 'https://www.instagram.com/songfornewyear/';
+  };
+
+  const onClickX = () => {
+    window.location = 'https://x.com/songfornewyear';
+  };
+
   return (
     <Container>
       <CardContainer ref={captureRef}>
@@ -105,9 +115,11 @@ const ResultPage = () => {
             <Wish textLength={wishLength}>{wishText}</Wish>
           </WishContainer>
           <SongContainer>
-            <AlbumCover src={res.recommended_song.cover_path}/>
+            <AlbumCover src={res.recommended_song.cover_path} />
             <SongTextContainer>
-              <SongTitle textLength={songTitleLength}>{songTitleText}</SongTitle>
+              <SongTitle textLength={songTitleLength}>
+                {songTitleText}
+              </SongTitle>
               <SongArtist textLength={artistLength}>{artistText}</SongArtist>
             </SongTextContainer>
           </SongContainer>
@@ -116,11 +128,15 @@ const ResultPage = () => {
           </LyricsContainer>
         </ResultCardContainer>
         <SongTime>
-          12월 31일 <TimeColor style={{ color: timeTextColor }}>{formattedTime}</TimeColor>에 재생하면 <br />이 가사로 한 해를 시작할 수 있어요!
+          12월 31일{' '}
+          <TimeColor style={{ color: timeTextColor }}>
+            {formattedTime}
+          </TimeColor>
+          에 재생하면 <br />이 가사로 한 해를 시작할 수 있어요!
         </SongTime>
       </CardContainer>
-      <BelowContents 
-        onCapture={handleCapture} 
+      <BelowContents
+        onCapture={handleCapture}
         videoCode={videoCode}
         nickname={res.nickname}
         songTitle={res.recommended_song.title}
@@ -134,6 +150,11 @@ const ResultPage = () => {
           <br />
           All Rights Reserved
         </FooterText>
+
+        <IconContainer>
+          <Insta src={instaIcon} onClick={onClickInsta} />
+          <X src={xIcon} onClick={onClickX} />
+        </IconContainer>
       </Footer>
     </Container>
   );
@@ -163,7 +184,7 @@ const Container = styled.div`
 `;
 
 const CardContainer = styled.div`
-background: #fffdf1;
+  background: #fffdf1;
   padding-bottom: 2.56rem;
 `;
 
@@ -222,10 +243,10 @@ const WishContainer = styled.div`
 const Wish = styled.div`
   text-align: center;
   font-size: ${({ textLength }) => {
-    if (textLength <= 20) return "clamp(2rem, 2rem + 2vw, 3rem)";
-    if (textLength <= 40) return "clamp(1.5rem, 1.5rem + 2vw, 2.5rem)";
-    if (textLength <= 50) return "clamp(1.3rem, 1.3rem + 1vw, 1.5rem)";
-    return "clamp(1.3rem, 1.3rem + 1vw, 1.5rem)";
+    if (textLength <= 20) return 'clamp(2rem, 2rem + 2vw, 3rem)';
+    if (textLength <= 40) return 'clamp(1.5rem, 1.5rem + 2vw, 2.5rem)';
+    if (textLength <= 50) return 'clamp(1.3rem, 1.3rem + 1vw, 1.5rem)';
+    return 'clamp(1.3rem, 1.3rem + 1vw, 1.5rem)';
   }};
   max-height: 7rem;
   overflow: hidden;
@@ -250,7 +271,7 @@ const SongContainer = styled.div`
 `;
 
 const AlbumCover = styled.img.attrs(() => ({
-  crossOrigin: "anonymous",
+  crossOrigin: 'anonymous',
 }))`
   width: clamp(7rem, 9rem, 10rem);
   aspect-ratio: 1 / 1;
@@ -258,7 +279,7 @@ const AlbumCover = styled.img.attrs(() => ({
   object-fit: cover;
   overflow: hidden;
   object-position: center;
-  background-color: #FFE4A4;
+  background-color: #ffe4a4;
 `;
 
 const SongTextContainer = styled.div`
@@ -274,10 +295,10 @@ const SongTextContainer = styled.div`
 
 const SongTitle = styled.div`
   font-size: ${({ textLength }) => {
-    if (textLength <= 5) return "clamp(2rem, 1.8rem + 2vw, 3rem)";
-    if (textLength <= 10) return "clamp(1.8rem, 1.6rem + 1.5vw, 2.5rem)";
-    if (textLength <= 15) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
-    return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
+    if (textLength <= 5) return 'clamp(2rem, 1.8rem + 2vw, 3rem)';
+    if (textLength <= 10) return 'clamp(1.8rem, 1.6rem + 1.5vw, 2.5rem)';
+    if (textLength <= 15) return 'clamp(1.6rem, 1.4rem + 1.2vw, 2rem)';
+    return 'clamp(1.4rem, 1.2rem + 1vw, 1.8rem)';
   }};
   max-width: 100%;
   margin-bottom: 0.69rem;
@@ -290,10 +311,10 @@ const SongTitle = styled.div`
 
 const SongArtist = styled.div`
   font-size: ${({ textLength }) => {
-    if (textLength <= 5) return "clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)";
-    if (textLength <= 10) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
-    if (textLength <= 15) return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
-    return "clamp(1.2rem, 1rem + 0.8vw, 1.5rem)";
+    if (textLength <= 5) return 'clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)';
+    if (textLength <= 10) return 'clamp(1.6rem, 1.4rem + 1.2vw, 2rem)';
+    if (textLength <= 15) return 'clamp(1.4rem, 1.2rem + 1vw, 1.8rem)';
+    return 'clamp(1.2rem, 1rem + 0.8vw, 1.5rem)';
   }};
   max-width: 100%;
   overflow: hidden;
@@ -319,10 +340,10 @@ const Lyrics = styled.div`
   text-align: center;
   vertical-align: middle;
   font-size: ${({ textLength }) => {
-    if (textLength <= 20) return "clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)";
-    if (textLength <= 40) return "clamp(1.6rem, 1.4rem + 1.2vw, 2rem)";
-    if (textLength <= 50) return "clamp(1.4rem, 1.2rem + 1vw, 1.8rem)";
-    return "clamp(1.2rem, 1rem + 0.8vw, 1.5rem)";
+    if (textLength <= 20) return 'clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem)';
+    if (textLength <= 40) return 'clamp(1.6rem, 1.4rem + 1.2vw, 2rem)';
+    if (textLength <= 50) return 'clamp(1.4rem, 1.2rem + 1vw, 1.8rem)';
+    return 'clamp(1.2rem, 1rem + 0.8vw, 1.5rem)';
   }};
   overflow: hidden;
   display: -webkit-box;
@@ -348,22 +369,26 @@ const TimeColor = styled.div`
 
 const Footer = styled.div`
   width: 100%;
-  height: 18.12rem;
-  position: relative;
+  height: 12.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  overflow-x: hidden;
-  overflow-y: hidden;
+  gap: 1.2rem;
 `;
 
 const FooterText = styled.div`
   color: var(--browngray);
   font-size: 1.25rem;
   text-align: center;
-
-  position: absolute;
-  transform: translate(-50%, -50%);
-
-  left: 50%;
-  bottom: 0;
-  z-index: 10;
 `;
+
+const IconContainer = styled.div`
+  display: flex;
+  gap: 2.87rem;
+`;
+
+const Insta = styled.img``;
+
+const X = styled.img``;

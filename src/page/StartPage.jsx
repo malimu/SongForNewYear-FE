@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import sparkleYellow from '../assets/StartPage/titleSparkle.svg';
 import DJRamji from '../assets/StartPage/DJRamji.svg';
 import bottomRamji from '../assets/StartPage/bottomRamji.svg';
+import instaIcon from '../assets/StartPage/brand_instagram.svg';
+import xIcon from '../assets/StartPage/brand_x.svg';
 import { WishForm } from '../component/StartPage/WishForm';
 import { OtherWishes } from '../component/StartPage/OtherWishes';
 import { useState } from 'react';
@@ -21,6 +23,14 @@ const StartPage = () => {
       </LoadingContainer>
     );
   }
+
+  const onClickInsta = () => {
+    window.location = 'https://www.instagram.com/songfornewyear/';
+  };
+
+  const onClickX = () => {
+    window.location = 'https://x.com/songfornewyear';
+  };
 
   return (
     <Container>
@@ -43,6 +53,10 @@ const StartPage = () => {
           <br />
           All Rights Reserved
         </FooterText>
+        <IconContainer>
+          <Insta src={instaIcon} onClick={onClickInsta} />
+          <X src={xIcon} onClick={onClickX} />
+        </IconContainer>
       </Footer>
     </Container>
   );
@@ -142,7 +156,7 @@ const Daramgi = styled.img`
 
 const Footer = styled.div`
   width: 100%;
-  height: 18.12rem;
+  height: 23.25rem;
   position: relative;
 
   overflow-x: hidden;
@@ -154,7 +168,7 @@ const BottomRamji = styled.img`
   transform: translate(-50%, -50%);
 
   left: 55%;
-  bottom: -60%;
+  bottom: -50%;
 `;
 
 const FooterText = styled.div`
@@ -166,6 +180,22 @@ const FooterText = styled.div`
   transform: translate(-50%, -50%);
 
   left: 50%;
-  bottom: 0;
+  bottom: 20%;
   z-index: 10;
 `;
+
+const IconContainer = styled.div`
+  display: flex;
+  gap: 2.87rem;
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+
+  left: 50%;
+  bottom: 10%;
+  z-index: 10;
+`;
+
+const Insta = styled.img``;
+
+const X = styled.img``;
