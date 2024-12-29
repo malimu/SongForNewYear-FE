@@ -36,14 +36,104 @@
 
 ## 🛠️ 기술 스택
 
-### Front-End
+### Frontend
 
 <img src="https://img.shields.io/badge/javaScript-F7DF1E?style=for-the-badge&logo=javaScript&logoColor=black"> <img src="https://img.shields.io/badge/react-61DBFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/Styled%20Components-DB7093?style=for-the-badge&logo=styledComponents&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
 <br>
 
-### Back-End
+### Backend
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![FastAPI](https://img.shields.io/badge/FastAPI-05998B?style=for-the-badge&logo=fastapi&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) ![AWS EC2](https://img.shields.io/badge/AWS%20EC2-%23FF9900.svg?style=for-the-badge&logo=amazonec2&logoColor=white) ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%232496ED.svg?style=for-the-badge&logo=docker&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/github%20actions-%23181717.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+
+
+## ⭐️ Team Malimu 팀원
+<table>
+  <tr height="160px">
+    <td width="300px" align="center">
+      <a href="https://github.com/seohyun-lee">
+        <img height="150px" width="150px" src="https://avatars.githubusercontent.com/seohyun-lee" />
+      </a>
+    </td>
+    <td width="300px" align="center">
+      <a href="https://github.com/jud1thDev">
+        <img height="150px" width="150px" src="https://avatars.githubusercontent.com/jud1thDev" />
+      </a>
+    </td>
+    <td width="300px" align="center">
+      <a href="https://github.com/moooooonchild">
+        <img height="150px" width="150px" src="https://avatars.githubusercontent.com/moooooonchild" />
+      </a>
+    </td>
+  </tr>
+  <tr height="30px">
+    <td align="center">
+      <a href="https://github.com/seohyun-lee">
+        <b>이서현</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/jud1thDev">
+        <b>정유정</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/moooooonchild">
+        <b>박서연</b>
+      </a>
+    </td>
+  </tr>
+  <tr height="30px">
+    <td align="center">
+      PM, Backend, 기획
+    </td>
+    <td align="center">
+      Backend, 기획, UXUI
+    </td>
+    <td align="center">
+      Frontend, 기획
+    </td>
+  </tr>
+  <tr height="160px">
+    <td width="300px" align="center">
+      <a href="https://github.com/billy0904">
+        <img height="150px" width="150px" src="https://avatars.githubusercontent.com/billy0904" />
+      </a>
+    </td>
+    <td width="300px" align="center">
+      <a href="https://github.com/bumjuni">
+        <img height="150px" width="150px" src="https://avatars.githubusercontent.com/bumjuni" />
+      </a>
+    </td>
+    <td width="300px" align="center">
+    </td>
+  </tr>
+  <tr height="30px">
+    <td align="center">
+      <a href="https://github.com/billy0904">
+        <b>이가빈</b>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/seohyun-lee">
+        <b>장지윤</b>
+      </a>
+    </td>
+    <td align="center">
+        <b>김수연</b>
+    </td>
+  </tr>
+  <tr height="30px">
+    <td align="center">
+      Frontend, UXUI
+    </td>
+    <td align="center">
+      Illust Design
+    </td>
+    <td align="center">
+      Marketing
+    </td>
+  </tr>
+</table>
 
 ---
 
