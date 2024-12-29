@@ -8,9 +8,7 @@
   <img alt="새해첫곡 바로가기" src="https://img.shields.io/badge/새해첫곡%20바로가기-%23FFFDF1">
 </a>
 <br>
-
-<img src="https://github.com/user-attachments/assets/8ed7cb70-aef0-4491-88b1-bf2f19bafd45" width="300">
-
+<img src="https://github.com/user-attachments/assets/a3666e72-0ff0-41de-a915-a8c85c8c9b24" width="280">
 <br>
 
 <a href="https://hits.seeyoufarm.com">
@@ -22,11 +20,11 @@
 </div>
 
 ## 💻 프로젝트 소개
-
+<img src="https://github.com/user-attachments/assets/8ed7cb70-aef0-4491-88b1-bf2f19bafd45" width="100">
+<br>
 새해 첫 곡으로 무슨 노래를 들을지 아직 고민 중이신가요?🤔<br>
 당신을 위해 DJ 다람이 ‘새해첫곡’을 준비했어요🌟<br>
 성공🏅, 행운🍀, 사랑❤️, 금전💵… 2025년 소원이 뭐든‼️<br>
-<br>
 소원에 맞는 찰떡같은 새해 첫 곡을 추천해 드릴게요🙌<br>
 스토리 공유하기 딱! 좋은 귀여운 이미지도 준비했으니 친구들에게도 알려주세요🤝<br>
 <br>
@@ -41,7 +39,7 @@
 ### Front-End
 
 <img src="https://img.shields.io/badge/javaScript-F7DF1E?style=for-the-badge&logo=javaScript&logoColor=black"> <img src="https://img.shields.io/badge/react-61DBFB?style=for-the-badge&logo=react&logoColor=white"> <img src="https://img.shields.io/badge/Styled%20Components-DB7093?style=for-the-badge&logo=styledComponents&logoColor=white"> <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"> <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
-
+<br>
 
 ### Back-End
 
