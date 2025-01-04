@@ -71,23 +71,19 @@ const ResultPage = () => {
   const LyricsLength = LyricsText.length;
 
   const recommendTime = res.recommended_song.recommend_time;
-  let formattedTime = `알 수 없음`
+  let formattedTime = `알 수 없음`;
 
-  // 데이터 요소가 쉼표로 나뉘어 2개일 경우만 split
-  if (recommendTime.includes(',')) {
-    const parts = recommendTime.split(',');
-    if (parts.length === 2) {
-      const resTime = parts[1].trim();
-
-      const [hh, mm, ss] = resTime.split(':');
-      formattedTime = `${hh}시 ${mm}분 ${ss}초`;
-    } else {
-      console.error('데이터 포맷 에러');
-    }
-  } else {
-    // 쉼표가 없을 경우 예외 처리
-    formattedTime = '23시 59분 59초';
-  }
+  const [hh, mm, ss] = recommendTime.split(':').map(Number);
+  
+  const inputSeconds = hh * 3600 + mm * 60 + ss;
+  const totalSecondsInADay = 24 * 3600;
+  const remainingSeconds = totalSecondsInADay - inputSeconds;
+  
+  const remainingHh = Math.floor(remainingSeconds / 3600);
+  const remainingMm = Math.floor((remainingSeconds % 3600) / 60);
+  const remainingSs = remainingSeconds % 60;
+  
+  formattedTime = `${String(remainingHh).padStart(2, '0')}시 ${String(remainingMm).padStart(2, '0')}분 ${String(remainingSs).padStart(2, '0')}초`;
 
   const url = res.recommended_song.youtube_path;
   const extractVideoCode = (url) => {
