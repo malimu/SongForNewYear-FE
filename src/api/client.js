@@ -7,3 +7,5 @@ export const client = axios.create({
   },
   withCredentials: true,
 });
+
+export const serverState = false;
